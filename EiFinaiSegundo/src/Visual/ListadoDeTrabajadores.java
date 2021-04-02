@@ -112,14 +112,14 @@ public class ListadoDeTrabajadores extends JDialog {
 			CbxTipo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Seleccion = CbxTipo.getSelectedItem().toString();
-					//CargarTabla2(Seleccion);
+					CargarTabla2(Seleccion);
 
 					
 				}
 
 
 			});
-			CbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Jefe de proyecto.", "Programador.", "Planificador.", "Dise\u00F1ador."}));
+			CbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Jefe de proyecto", "Programador", "Planificador", "Dise\u00F1ador"}));
 			CbxTipo.setBounds(122, 17, 130, 21);
 			panel.add(CbxTipo);
 		}
@@ -210,7 +210,7 @@ public class ListadoDeTrabajadores extends JDialog {
 			}
 		}
 		CargarTabla();
-	//	CargarTabla2(Seleccion);
+		CargarTabla2(Seleccion);
 		
 		
 	}
@@ -250,54 +250,75 @@ public class ListadoDeTrabajadores extends JDialog {
 		}
 		
 	}
-	/*private void CargarTabla2(String seleccion) {
+	private void CargarTabla2(String seleccion) {
 		Model.setRowCount(0);
 		Filas = new Object[Model.getColumnCount()];
 
 		if(Seleccion.equalsIgnoreCase("<Todos>")) {
 			CargarTabla();
-		}else if(Seleccion.equalsIgnoreCase("Queso esferico")) {
-			for(Quesos Q:Queseria.getInstance().getMisQuesos()) {
-				if(Q instanceof Esfera) {
-					Filas[0] = Q.getNombre();
-					Filas[1] = Queseria.getInstance().TipoDeQueso(Q);
-					Filas[2] = Q.getPrecioBase();
-					Filas[3] = Q.getPrecioUnitario();
-					Filas[4] = ((Esfera) Q).getRadioE();
+		}else if(Seleccion.equalsIgnoreCase("Jefe de proyecto")) {
+			for(Trabajadora T:Empresa.getInstance().getMisTrabajadores()) {
+				if(T instanceof JefeProyecto) {
+					Filas[0] = T.getIdentificador();
+					Filas[1] = T.getNombre();
+					Filas[2] = Empresa.getInstance().TipoDeTrabajador(T);
+					Filas[3] = T.getApellido();
+					Filas[4] = T.getDireccion();
+					Filas[5] = ((JefeProyecto) T).getCantidadDeTrabajadores();
+					Filas[6] = null;
+					Filas[7] = null;
 					Model.addRow(Filas);
 				}
 			}
 
 
-		}else if(Seleccion.equalsIgnoreCase("Queso cilindrico")) {
-			for(Quesos Q:Queseria.getInstance().getMisQuesos()) {
-				if(Q instanceof Cilindro && !(Q instanceof CilindroHueco)) {
-					Filas[0] = Q.getNombre();
-					Filas[1] = Queseria.getInstance().TipoDeQueso(Q);
-					Filas[2] = Q.getPrecioBase();
-					Filas[3] = Q.getPrecioUnitario();
-					Filas[4] = ((Cilindro) Q).getRadioC();
-					Filas[5] = ((Cilindro) Q).getLongitud();
+		}else if(Seleccion.equalsIgnoreCase("Programador")) {
+			for(Trabajadora T:Empresa.getInstance().getMisTrabajadores()) {
+				if(T instanceof Programadores) {
+					Filas[0] = T.getIdentificador();
+					Filas[1] = T.getNombre();
+					Filas[2] = Empresa.getInstance().TipoDeTrabajador(T);
+					Filas[3] = T.getApellido();
+					Filas[4] = T.getDireccion();
+					Filas[5] = null;
+					Filas[6] = ((Programadores) T).getLenguajeDeProgramacion();
+					Filas[7] = null;
 					Model.addRow(Filas);
 				}
 			}
-		}else if(Seleccion.equalsIgnoreCase("Queso cilindricoH")) {
-			for(Quesos Q:Queseria.getInstance().getMisQuesos()) {
-				if(Q instanceof CilindroHueco ) {
-					Filas[0] = Q.getNombre();
-					Filas[1] = Queseria.getInstance().TipoDeQueso(Q);
-					Filas[2] = Q.getPrecioBase();
-					Filas[3] = Q.getPrecioUnitario();
-					Filas[4] = ((Cilindro) Q).getRadioC();
-					Filas[5] = ((Cilindro) Q).getLongitud();
-					Filas[6] = ((CilindroHueco) Q).getRadioI();
+		}else if(Seleccion.equalsIgnoreCase("Planificador")) {
+			for(Trabajadora T:Empresa.getInstance().getMisTrabajadores()) {
+				if(T instanceof Planificadores ) {
+					Filas[0] = T.getIdentificador();
+					Filas[1] = T.getNombre();
+					Filas[2] = Empresa.getInstance().TipoDeTrabajador(T);
+					Filas[3] = T.getApellido();
+					Filas[4] = T.getDireccion();
+					Filas[5] = null;
+					Filas[6] = null;
+					Filas[7] = ((Planificadores) T).getCantidadDeDias();
+					Model.addRow(Filas);
+				}
+			}
+
+		}else if(Seleccion.equalsIgnoreCase("Diseñador")) {
+			for(Trabajadora T:Empresa.getInstance().getMisTrabajadores()) {
+				if(T instanceof Diseñador  ) {
+					Filas[0] = T.getIdentificador();
+					Filas[1] = T.getNombre();
+					Filas[2] = Empresa.getInstance().TipoDeTrabajador(T);
+					Filas[3] = T.getApellido();
+					Filas[4] = T.getDireccion();
+					Filas[5] = null;
+					Filas[6] = null;
+					Filas[7] = null;
 					Model.addRow(Filas);
 				}
 			}
 
 		}
 
-	}*/
+	}
 
 
 }
