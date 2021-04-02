@@ -9,6 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Logico.Diseñador;
+import Logico.Empresa;
+import Logico.JefeProyecto;
+import Logico.Planificadores;
+import Logico.Trabajadora;
+import Logico.Programadores;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -84,7 +90,7 @@ public class ListadoDeTrabajadores extends JDialog {
 	public ListadoDeTrabajadores() {
 		//setIconImage(Toolkit.getDefaultToolkit().getImage(ListaDeQuesos.class.getResource("/Imagenes/logo.png")));
 		setTitle("Listado de trabajadores");
-		setBounds(100, 100, 771, 557);
+		setBounds(100, 100, 1114, 557);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLocationRelativeTo(null);
@@ -93,7 +99,7 @@ public class ListadoDeTrabajadores extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(5, 5, 742, 41);
+		panel.setBounds(5, 5, 1085, 41);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		{
@@ -120,7 +126,7 @@ public class ListadoDeTrabajadores extends JDialog {
 		{
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new EmptyBorder(0, 0, 0, 0));
-			panel_1.setBounds(5, 49, 742, 434);
+			panel_1.setBounds(5, 49, 1085, 434);
 			contentPanel.add(panel_1);
 			panel_1.setLayout(new BorderLayout(0, 0));
 			
@@ -137,7 +143,7 @@ public class ListadoDeTrabajadores extends JDialog {
 				table = new JTable();
 				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				Model = new DefaultTableModel();
-				String[] Headers = {"Codigo","Nombre","Apellidos","Edad","Sexo","Direccion"};
+				String[] Headers = {"Codigo","Nombre","Cargo","Apellidos","Direccion","C.Trabajadores","L.Programacion","C.DeDias"};
 				Model.setColumnIdentifiers(Headers);
 				table.setModel(Model);
 				table.setFont(new Font("Verdana", Font.PLAIN, 17));
@@ -203,41 +209,48 @@ public class ListadoDeTrabajadores extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		//CargarTabla();
+		CargarTabla();
 	//	CargarTabla2(Seleccion);
 		
 		
 	}
-	/*private void CargarTabla() {
+	private void CargarTabla() {
 		Model.setRowCount(0);
 		Filas = new Object[Model.getColumnCount()];
-		for (Trabajadora C : ///Queseria.getInstance().getMisQuesos()) {
-			if(C != null) {	
-				Filas[0] = C.getNombre();
-				Filas[1] = Queseria.getInstance().TipoDeQueso(C);
-				Filas[2] = C.getPrecioBase();
-				Filas[3] = C.getPrecioUnitario();
-				if(C instanceof Esfera) {
-					Filas[4] = ((Esfera) C).getRadioE();
+		for (Trabajadora T : Empresa.getInstance().getMisTrabajadores()) {
+			if(T != null) {	
+				Filas[0] = T.getIdentificador();
+				Filas[1] = T.getNombre();
+				Filas[2] = Empresa.getInstance().TipoDeTrabajador(T);
+				Filas[3] = T.getApellido();
+				Filas[4] = T.getDireccion();
+				if(T instanceof JefeProyecto) {
+					Filas[5] = ((JefeProyecto) T).getCantidadDeTrabajadores();
+					Filas[6] = null;
+					Filas[7] = null;
+				}
+				if(T instanceof Programadores) {
+					Filas[6] = ((Programadores) T).getLenguajeDeProgramacion();
+					Filas[5] = null;
+					Filas[7] = null;
+					
+				}
+				if(T instanceof Planificadores) {
+					Filas[7] = ((Planificadores) T).getCantidadDeDias();
 					Filas[5] = null;
 					Filas[6] = null;
 				}
-				else {
-					Filas[4] = ((Cilindro) C).getRadioC();
-					Filas[5] = ((Cilindro) C).getLongitud();
-					if(C instanceof CilindroHueco) {
-						Filas[6] = ((CilindroHueco) C).getRadioI();
-					}
-					else {
-						Filas[6] = null;
-					}
+				if(T instanceof Diseñador) {
+					Filas[7] = null;
+					Filas[5] = null;
+					Filas[6] = null;
 				}
 				Model.addRow(Filas);
 			}
 		}
 		
 	}
-	private void CargarTabla2(String seleccion) {
+	/*private void CargarTabla2(String seleccion) {
 		Model.setRowCount(0);
 		Filas = new Object[Model.getColumnCount()];
 

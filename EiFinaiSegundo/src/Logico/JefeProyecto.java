@@ -5,7 +5,7 @@ public class JefeProyecto extends Trabajadora {
 	protected int CantidadDeTrabajadores;
 	protected float Salario;
 	
-	public JefeProyecto(String identificador, String nombre, String apellido, String direccion, String sexo, int edad,
+	public JefeProyecto(String identificador, String nombre, String apellido, int edad, String sexo, String direccion,
 			int cantidadDeTrabajadores) {
 		super(identificador, nombre, apellido, direccion, sexo, edad);
 		CantidadDeTrabajadores = cantidadDeTrabajadores;
