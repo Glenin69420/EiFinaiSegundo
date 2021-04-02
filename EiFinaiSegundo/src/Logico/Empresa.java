@@ -5,17 +5,17 @@ import java.util.ArrayList;
 public class Empresa {
 	
 	private ArrayList<Trabajadora> MisTrabajadores;
-	//private ArrayList<Cliente> MisClientes;
-	//private ArrayList<Contrato> MisContratos;
-	//private ArrayList<Proyectos> MisProyectos;
+	private ArrayList<Cliente> MisClientes;
+	private ArrayList<Contrato> MisContratos;
+	private ArrayList<Proyecto> MisProyectos;
 	private static Empresa Centro = null;
 
 	public Empresa() {
 		super();
-		this.MisTrabajadores = new ArrayList<>();
-		//this.MisClientes = new ArrayList<>();
-		//this.MisContratos = new ArrayList<>();
-		//this.MisProyectos = new ArrayList<>();
+		this.MisTrabajadores = new ArrayList<Trabajadora>();
+		this.MisClientes = new ArrayList<Cliente>();
+		this.MisContratos = new ArrayList<Contrato>();
+		this.MisProyectos = new ArrayList<Proyecto>();
 	}
 	
 	public static Empresa getInstance() {
