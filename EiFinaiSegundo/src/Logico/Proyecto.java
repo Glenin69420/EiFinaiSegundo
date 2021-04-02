@@ -7,9 +7,10 @@ public class Proyecto {
 	private String descripcion;
 	private Trabajadora jefe; //Todavia en duda
 	
-	public Proyecto(ArrayList<Trabajadora> empleados, String descripcion, Trabajadora jefe) {
+	//Los ArrayList se inicializan en el constructor, no se ponen como parametro.
+	public Proyecto(String descripcion, Trabajadora jefe) {
 		super();
-		this.empleados = empleados;
+		this.empleados = new ArrayList<Trabajadora>();
 		this.descripcion = descripcion;
 		this.jefe = jefe;
 	}

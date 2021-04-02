@@ -31,6 +31,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.Toolkit;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.awt.Window.Type;
 
 public class RegistroDeTrabajadores extends JDialog {
 
@@ -69,6 +70,7 @@ public class RegistroDeTrabajadores extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistroDeTrabajadores() {
+		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroDeTrabajadores.class.getResource("/Imagenes/cliente (1).png")));
 		//setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroDeTrabajadores.class.getResource("/Imagenes/cliente (1).png")));
 		setTitle("Registro de trabajador");
@@ -81,6 +83,7 @@ public class RegistroDeTrabajadores extends JDialog {
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setForeground(Color.BLACK);
 			panel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, Color.BLUE, null, null, null));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
@@ -148,6 +151,7 @@ public class RegistroDeTrabajadores extends JDialog {
 			panel_1.add(SpnEdad);
 			
 			JPanel panel_2 = new JPanel();
+			panel_2.setForeground(Color.BLACK);
 			panel_2.setBorder(new TitledBorder(null, "Tipo de trabajador", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panel_2.setBounds(10, 10, 662, 59);
 			panel.add(panel_2);
