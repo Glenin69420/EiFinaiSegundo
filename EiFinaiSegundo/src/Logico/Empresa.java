@@ -40,6 +40,9 @@ public class Empresa {
 	public boolean EliminarTrabajador(Trabajadora Trabajador) {
 		return MisTrabajadores.remove(Trabajador);
 	}
+	public void InsertarCliente(Cliente C) {
+		MisClientes.add(C);
+	} 
 	
 	public Trabajadora BuscarTrabajador(String Codigo) {
 

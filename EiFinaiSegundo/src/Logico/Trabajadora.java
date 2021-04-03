@@ -11,7 +11,7 @@ public class Trabajadora {
 	//protected float Salario;//Voy hacer que cada herencia tenga este atributo para que la clase diseno no este sola.
 	protected int Proyecto;
 	protected int Evaluacion;
-	public static int Codigo=1;
+	public static int Codigo = 1;
 	
 	public Trabajadora(String identificador, String nombre, String apellido, String direccion, String sexo, int edad) {
 		super();

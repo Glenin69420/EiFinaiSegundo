@@ -7,13 +7,15 @@ public class Cliente {
 	private String nombre;
 	private String direccion;
 	private ArrayList<Contrato> cantProyecto;
+	public static int Codigo=1;
 	
-	public Cliente(String identificacion, String nombre, String direccion, ArrayList<Contrato> cantProyecto) {
+	public Cliente(String identificacion, String nombre, String direccion) {
 		super();
 		this.identificacion = identificacion;
 		this.nombre = nombre;
 		this.direccion = direccion;
-		this.cantProyecto = cantProyecto;
+		this.cantProyecto = new ArrayList<Contrato>();
+		this.Codigo++;
 	}
 	
 	public String getIdentificacion() {

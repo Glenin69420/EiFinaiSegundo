@@ -99,6 +99,7 @@ public class Login extends JDialog {
 					
 				}else {
 					JOptionPane.showMessageDialog(null, "Inicio satisfactorio ", "Comfirmacion", JOptionPane.ERROR_MESSAGE);
+					dispose();
 				}
 			}
 		});

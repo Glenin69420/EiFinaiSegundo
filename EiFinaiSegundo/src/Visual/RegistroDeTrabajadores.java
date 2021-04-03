@@ -71,7 +71,7 @@ public class RegistroDeTrabajadores extends JDialog {
 	 */
 	public RegistroDeTrabajadores() {
 		setModal(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroDeTrabajadores.class.getResource("/Imagenes/cliente (1).png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroDeTrabajadores.class.getResource("/Imagenes/cliente (2).png")));
 		//setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroDeTrabajadores.class.getResource("/Imagenes/cliente (1).png")));
 		setTitle("Registro de trabajador");
 		setResizable(false);
