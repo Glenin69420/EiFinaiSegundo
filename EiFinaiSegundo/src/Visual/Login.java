@@ -22,12 +22,15 @@ import Logico.Empresa;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.Toolkit;
+import javax.swing.JRadioButton;
 
 public class Login extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField TxtNombre;
 	private JPasswordField TxtContraseña;
+	private JTextField TxtContra1;
+	private JRadioButton RbtnVer;
 
 	/**
 	 * Launch the application.
@@ -105,5 +108,26 @@ public class Login extends JDialog {
 		});
 		btnInicio.setBounds(83, 187, 89, 23);
 		contentPanel.add(btnInicio);
+		
+		RbtnVer = new JRadioButton("Ver");
+		RbtnVer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(RbtnVer.isSelected()) {
+					TxtContra1.setText(TxtContraseña.getText());
+					TxtContra1.setVisible(true);
+
+				}else {
+					TxtContra1.setVisible(false);
+				}
+			}
+		});
+		RbtnVer.setBounds(176, 147, 48, 21);
+		contentPanel.add(RbtnVer);
+		
+		TxtContra1 = new JTextField();
+		TxtContra1.setBounds(84, 148, 86, 20);
+		TxtContra1.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(TxtContra1);
+		TxtContra1.setColumns(10);
 	}
 }
