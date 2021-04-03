@@ -9,6 +9,7 @@ public class Empresa {
 	private ArrayList<Contrato> MisContratos;
 	private ArrayList<Proyecto> MisProyectos;
 	private static Empresa Centro = null;
+	private static Cliente loginCliente;
 
 	public Empresa() {
 		super();
@@ -60,11 +61,21 @@ public class Empresa {
 		}
 		else if(T instanceof Planificadores) {
 			return "Planificador";
-			
+
 		}
 		else {
 			return "Diseñador";
 		}
 
-}
+	}
+	public boolean confirmLogin(String Nombre, String Contraseña) {
+		boolean login = false;
+		for (Cliente C : MisClientes) {
+			if(C.getNombre().equalsIgnoreCase(Nombre) && C.getIdentificacion().equalsIgnoreCase(Contraseña)){
+				loginCliente = C;
+				login = true;
+			}
+		}
+		return login;
+	}
 }
