@@ -114,9 +114,11 @@ public class Login extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if(RbtnVer.isSelected()) {
 					TxtContra1.setText(TxtContraseña.getText());
+					TxtContraseña.setVisible(false);
 					TxtContra1.setVisible(true);
 
 				}else {
+					TxtContraseña.setVisible(true);
 					TxtContra1.setVisible(false);
 				}
 			}
@@ -125,6 +127,8 @@ public class Login extends JDialog {
 		contentPanel.add(RbtnVer);
 		
 		TxtContra1 = new JTextField();
+		TxtContra1.setVisible(false);
+		TxtContra1.setEditable(false);
 		TxtContra1.setBounds(84, 148, 86, 20);
 		TxtContra1.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(TxtContra1);
