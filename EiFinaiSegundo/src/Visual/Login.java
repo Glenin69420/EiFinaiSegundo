@@ -101,7 +101,7 @@ public class Login extends JDialog {
 					JOptionPane.showMessageDialog(null, "El nombre o contraseña no existen. ", "Error", JOptionPane.ERROR_MESSAGE);
 					
 				}else {
-					JOptionPane.showMessageDialog(null, "Inicio satisfactorio ", "Comfirmacion", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Inicio satisfactorio ", "Comfirmacion", JOptionPane.INFORMATION_MESSAGE);
 					dispose();
 				}
 			}
