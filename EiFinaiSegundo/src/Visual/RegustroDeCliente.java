@@ -102,7 +102,9 @@ public class RegustroDeCliente extends JDialog {
 						Empresa.getInstance().InsertarCliente(C);
 						clean();
 						JOptionPane.showMessageDialog(null, "El cliente ha sido registrado con exito", "Registro satisfactorio", JOptionPane.INFORMATION_MESSAGE);
+						dispose();
 					}
+					
 
 
 				});
