@@ -27,6 +27,18 @@ public class Empresa {
 	}
 	
 
+	public ArrayList<Cliente> getMisClientes() {
+		return MisClientes;
+	}
+
+	public ArrayList<Contrato> getMisContratos() {
+		return MisContratos;
+	}
+
+	public ArrayList<Proyecto> getMisProyectos() {
+		return MisProyectos;
+	}
+
 	public ArrayList<Trabajadora> getMisTrabajadores() {
 		return MisTrabajadores;
 	}

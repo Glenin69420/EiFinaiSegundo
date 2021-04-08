@@ -6,18 +6,43 @@ public class Cliente {
 	private String identificacion;
 	private String nombre;
 	private String direccion;
+	private String Apellidos;
+	private String Telefono;
 	private ArrayList<Contrato> cantProyecto;
 	public static int Codigo=1;
 	
-	public Cliente(String identificacion, String nombre, String direccion) {
+	public Cliente(String identificacion, String nombre, String Apelidos, String Telefono, String direccion) {
 		super();
 		this.identificacion = identificacion;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.cantProyecto = new ArrayList<Contrato>();
 		this.Codigo++;
+		this.Telefono = Telefono;
+		this.Apellidos = Apelidos;
 	}
 	
+	
+	public String getApellidos() {
+		return Apellidos;
+	}
+
+
+	public void setApellidos(String apellidos) {
+		Apellidos = apellidos;
+	}
+
+
+	public String getTelefono() {
+		return Telefono;
+	}
+
+
+	public void setTelefono(String telefono) {
+		Telefono = telefono;
+	}
+
+
 	public String getIdentificacion() {
 		return identificacion;
 	}

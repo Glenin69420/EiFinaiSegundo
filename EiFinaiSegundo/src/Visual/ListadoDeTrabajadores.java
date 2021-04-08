@@ -199,7 +199,7 @@ public class ListadoDeTrabajadores extends JDialog {
 				getRootPane().setDefaultButton(BtnEliminar);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Salir");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

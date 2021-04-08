@@ -63,7 +63,7 @@ public class Login extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.PINK);
 		contentPanel.setForeground(Color.BLUE);
-		contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Inicio de sesion", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
+		contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Inicio de sesion", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setLocationRelativeTo(null);
 		
@@ -167,7 +167,7 @@ public class Login extends JDialog {
 		JButton btnNewButton = new JButton("Registrate");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegustroDeCliente C = new RegustroDeCliente();
+				RegistroDeCliente C = new RegistroDeCliente();
 				C.setVisible(true);
 				C.setModal(false);
 			}
