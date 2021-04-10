@@ -67,6 +67,17 @@ public class Empresa {
 		}
 		return null;
 	}
+	public Cliente BuscarCliente(String Codigo) {
+
+		for(Cliente C:MisClientes) {
+			if(C!=null) {
+				if(C.getIdentificacion().equalsIgnoreCase(Codigo)) {
+					return C;
+				}
+			}
+		}
+		return null;
+	}
 	public static String TipoDeTrabajador(Trabajadora T) {
 		if(T instanceof JefeProyecto) {
 			return "Jefe.Proyecto";

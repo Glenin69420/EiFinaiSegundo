@@ -52,6 +52,7 @@ public class RegistroDeCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistroDeCliente() {
+		setForeground(Color.GRAY);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroDeCliente.class.getResource("/Imagenes/usuario-especialista.png")));
 		setTitle("Registro de clientes");
 		setBounds(100, 100, 376, 413);

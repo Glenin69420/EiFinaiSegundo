@@ -118,10 +118,13 @@ public class Login extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if(Empresa.getInstance().confirmLogin(TxtNombre.getText(), TxtContraseña.getText())!=true) {
 					JOptionPane.showMessageDialog(null, "El nombre o contraseña no existen. ", "Error", JOptionPane.ERROR_MESSAGE);
+					Clean();
 					
 				}else {
 					JOptionPane.showMessageDialog(null, "Inicio satisfactorio ", "Comfirmacion", JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					//ImformacionDeClientes C = new ImformacionDeClientes();
+					//C.setVisible(true);
 				}
 			}
 		});
@@ -175,5 +178,9 @@ public class Login extends JDialog {
 		btnNewButton.setForeground(Color.BLUE);
 		btnNewButton.setBounds(254, 267, 99, 21);
 		contentPanel.add(btnNewButton);
+	}
+	public void Clean() {
+		TxtNombre.setText("");
+		TxtContraseña.setText("");
 	}
 }

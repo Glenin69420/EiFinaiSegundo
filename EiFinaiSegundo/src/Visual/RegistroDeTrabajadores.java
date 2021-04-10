@@ -261,6 +261,7 @@ public class RegistroDeTrabajadores extends JDialog {
 			PanelPlanificador.add(lblNewLabel_8);
 			
 			SpnDias = new JSpinner();
+			SpnDias.setModel(new SpinnerNumberModel(new Integer(1), new Integer(0), null, new Integer(1)));
 			SpnDias.setBounds(112, 23, 96, 19);
 			PanelPlanificador.add(SpnDias);
 		}
