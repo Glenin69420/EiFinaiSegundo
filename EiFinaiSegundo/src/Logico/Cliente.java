@@ -9,9 +9,10 @@ public class Cliente {
 	private String Apellidos;
 	private String Telefono;
 	private ArrayList<Contrato> cantProyecto;
+	private String password;
 	public static int Codigo=1;
 	
-	public Cliente(String identificacion, String nombre, String Apelidos, String Telefono, String direccion) {
+	public Cliente(String identificacion, String nombre, String Apelidos, String Telefono, String direccion, String password) {
 		super();
 		this.identificacion = identificacion;
 		this.nombre = nombre;
@@ -20,6 +21,7 @@ public class Cliente {
 		this.Codigo++;
 		this.Telefono = Telefono;
 		this.Apellidos = Apelidos;
+		this.password = password;
 	}
 	
 	
@@ -66,5 +68,17 @@ public class Cliente {
 	}
 	public void setCantProyecto(ArrayList<Contrato> cantProyecto) {
 		this.cantProyecto = cantProyecto;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}	
+	
+	
 }
