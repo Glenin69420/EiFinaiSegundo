@@ -143,7 +143,7 @@ public class RegistroDeCliente extends JDialog {
 			BtnRegistrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Cliente C = new Cliente(TxtCodigo.getText(), TxtNombre.getText(), TxtApellidos.getText(), 
-							TxtTelefono.getText(), TxtDireccion.getText());
+							TxtTelefono.getText(), TxtDireccion.getText(), "prueba");
 					Empresa.getInstance().InsertarCliente(C);
 					clean();
 					JOptionPane.showMessageDialog(null, "El cliente ha sido registrados con exito. ", "Registro satisfactorio", JOptionPane.INFORMATION_MESSAGE);
