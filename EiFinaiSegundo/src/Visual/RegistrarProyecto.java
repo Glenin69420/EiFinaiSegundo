@@ -30,6 +30,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.ListSelectionModel;
 
 public class RegistrarProyecto extends JDialog {
 
@@ -42,6 +43,8 @@ public class RegistrarProyecto extends JDialog {
 	private ArrayList<String> disponibles;
 	private ArrayList<String> Seleccionados;
 	private String Seleccion = "<Todos>";
+	private JButton BtnRegistrar;
+	private JButton BtnVolver;
 
 	/**
 	 * Launch the application.
@@ -149,13 +152,14 @@ public class RegistrarProyecto extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					index = ListaDisponibles.getSelectedIndex();
 					if(index!=-1) {
-						BtnCrar.setEnabled(true);
+						BtnRegistrar.setEnabled(true);
 						}
 				}
 			});
+			ListaDisponibles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			panel_2.add(ListaDisponibles, BorderLayout.CENTER);
 			
-			JButton BtnRegistrar = new JButton(">>");
+			BtnRegistrar = new JButton(">>");
 			BtnRegistrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(ListaDisponibles.getSelectedIndex()!=-1) {
@@ -171,10 +175,11 @@ public class RegistrarProyecto extends JDialog {
 					
 				}
 			});
+			BtnRegistrar.setEnabled(false);
 			BtnRegistrar.setBounds(225, 314, 85, 21);
 			panel.add(BtnRegistrar);
 			
-			JButton BtnVolver = new JButton("<<");
+			BtnVolver = new JButton("<<");
 			BtnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(ListaSeleccionados.getSelectedIndex() != -1) {
@@ -188,6 +193,7 @@ public class RegistrarProyecto extends JDialog {
 					}
 				}
 			});
+			BtnVolver.setEnabled(false);
 			BtnVolver.setBounds(225, 361, 85, 21);
 			panel.add(BtnVolver);
 			
@@ -198,6 +204,7 @@ public class RegistrarProyecto extends JDialog {
 			panel_3.setLayout(new BorderLayout(0, 0));
 			
 			ListaSeleccionados = new JList();
+			ListaSeleccionados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			ListaSeleccionados.setLocation(0, 265);
 			ListaSeleccionados.setSize(195, 164);
 			ListaSeleccionados.addMouseListener(new MouseAdapter() {
@@ -223,8 +230,8 @@ public class RegistrarProyecto extends JDialog {
 		disponibles = new ArrayList<String>();
 		Seleccionados = new ArrayList<String>();
 		if(seleccion.equalsIgnoreCase("<Todos>")){
-		for(Proyecto P:Empresa.getInstance().getMisProyectos()) {
-			disponibles.add("Nombre:"+P.getNombre()+":"+"Tipo"+":"+Empresa.TipoDeProyecto(P));
+		for(Trabajadora P:Empresa.getInstance().getMisTrabajadores()) {
+			disponibles.add("Nombre:"+P.getNombre()+":"+"Tipo"+":"+Empresa.TipoDeTrabajador(P));
 		}
 		}
 		ListaDisponibles.removeAll();
