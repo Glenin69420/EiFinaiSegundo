@@ -12,22 +12,38 @@ public class Contrato {
 	private String nombre;
 	private float penalidad;
 	private int prorroga;
+	private Cliente cliente;
 	
-	public Contrato(Date fechaInicio, Date fechaDeExpiro, String identificador, ArrayList<Cliente> clientes,
-			String nombre, float penalidad, int prorroga) {
+	public Contrato(String Nombre, String identificador , Cliente cliente, Date fechaInicio, Date fechaDeExpiro
+			) {
 		super();
 		this.fechaInicio = new java.util.Date();
 		this.fechaDeExpiro = fechaDeExpiro;
 		this.identificador = identificador;
-		this.clientes = clientes;
+		this.cliente = cliente;
 		this.nombre = nombre;
-		this.penalidad = penalidad;
-		this.prorroga = prorroga;
+		this.prorroga = 0;
+		this.penalidad = 0;
+		//this.penalidad = penalidad;
+		//this.prorroga = prorroga;
 
 	}
 
 	public Date getFechaInicio() {
 		return fechaInicio;
+	}
+	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 
 	public Date getFechaDeExpiro() {
