@@ -93,5 +93,5 @@ public class ProyectoPrincipal extends JFrame {
 		super.setSize(dim.width, dim.height-45);
 		setLocationRelativeTo(null);
 	}
-
+	//xd
 }
