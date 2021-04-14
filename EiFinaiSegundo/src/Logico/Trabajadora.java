@@ -1,7 +1,13 @@
 package Logico;
 
-public class Trabajadora {
+import java.io.Serializable;
+
+public class Trabajadora implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2609429704855546833L;
 	protected String Identificador;
 	protected String Nombre;
 	protected String Apellido;

@@ -1,32 +1,52 @@
 package Visual;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import java.awt.Font;
-import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.border.TitledBorder;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Label;
 
+import Logico.Cliente;
 import Logico.Empresa;
-
-import javax.swing.border.EtchedBorder;
-import java.awt.Color;
-import java.awt.Toolkit;
-import javax.swing.JRadioButton;
-import java.awt.SystemColor;
 
 public class Login extends JDialog {
 
@@ -42,14 +62,49 @@ public class Login extends JDialog {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			Login dialog = new Login();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
+		EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					FileInputStream empresa;
+					FileOutputStream empresa2;
+					ObjectInputStream empresaRead;
+					ObjectOutputStream empresaWrite;
+					try {
+						empresa = new FileInputStream ("empresa.dat");
+						empresaRead = new ObjectInputStream(empresa);
+						Empresa temp = (Empresa)empresaRead.readObject();
+						Empresa.setCentro(temp);
+						empresa.close();
+						empresaRead.close();
+					} catch (FileNotFoundException e) {
+						try {
+							empresa2 = new  FileOutputStream("empresa.dat");
+							empresaWrite = new ObjectOutputStream(empresa2);
+							Cliente aux = new Cliente("C-1", "Frank", "Paulino", "809-580-5544", "Aeropuerto", "Prueba");
+							Empresa.getInstance().InsertarCliente(aux);
+							empresaWrite.writeObject(Empresa.getInstance());
+							empresa2.close();
+							empresaWrite.close();
+						} catch (FileNotFoundException e1) {
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+						}
+					} catch (IOException e) {
+						
+						
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					try {
+						Login frame = new Login();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		}
-	}
 
 	/**
 	 * Create the dialog.
@@ -117,14 +172,13 @@ public class Login extends JDialog {
 		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Empresa.getInstance().confirmLogin(TxtNombre.getText(), TxtContraseña.getText())!=true) {
-					JOptionPane.showMessageDialog(null, "El nombre o contraseña no existen. ", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "El nombre o contraseña no existen. ", "ERROR", JOptionPane.ERROR_MESSAGE);
 					Clean();
 					
 				}else {
-					JOptionPane.showMessageDialog(null, "Inicio satisfactorio ", "Comfirmacion", JOptionPane.INFORMATION_MESSAGE);
+					ProyectoPrincipal frame = new ProyectoPrincipal();
 					dispose();
-					//ImformacionDeClientes C = new ImformacionDeClientes();
-					//C.setVisible(true);
+					frame.setVisible(true);
 				}
 			}
 		});

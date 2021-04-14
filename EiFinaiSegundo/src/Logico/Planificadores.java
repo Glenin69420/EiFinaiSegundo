@@ -2,6 +2,10 @@ package Logico;
 
 public class Planificadores extends Trabajadora {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 571373952529166578L;
 	protected int CantidadDeDias;
 	protected float Salario;
 	

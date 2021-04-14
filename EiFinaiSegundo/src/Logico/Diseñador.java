@@ -3,6 +3,10 @@ package Logico;
 public class Diseñador extends Trabajadora {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5548943361023490025L;
 	protected float Salario;
 
 	public Diseñador(String identificador, String nombre, String apellido, String direccion, String sexo, int edad) {

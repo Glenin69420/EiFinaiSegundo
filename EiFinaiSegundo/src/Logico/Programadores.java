@@ -2,6 +2,10 @@ package Logico;
 
 public class Programadores extends Trabajadora {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -634640157192238885L;
 	protected String LenguajeDeProgramacion;
 	protected float Salario;
 	

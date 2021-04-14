@@ -1,9 +1,14 @@
 package Logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Empresa {
+public class Empresa implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4736481894836561533L;
 	private ArrayList<Trabajadora> MisTrabajadores;
 	private ArrayList<Cliente> MisClientes;
 	private ArrayList<Contrato> MisContratos;
@@ -26,6 +31,14 @@ public class Empresa {
 		return Centro;
 	}
 	
+
+	public static Empresa getCentro() {
+		return Centro;
+	}
+
+	public static void setCentro(Empresa centro) {
+		Centro = centro;
+	}
 
 	public ArrayList<Cliente> getMisClientes() {
 		return MisClientes;
