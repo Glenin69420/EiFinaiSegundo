@@ -20,13 +20,16 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
 import java.util.Calendar;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class RegistroDeContrato extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField CodigoCliente;
 	private JTextField textField;
-
+	private int index = -1;
+	private int indexBack = -1;
 	/**
 	 * Launch the application.
 	 */
@@ -99,8 +102,17 @@ public class RegistroDeContrato extends JDialog {
 				panel_1.add(panel_2);
 				panel_2.setLayout(new BorderLayout(0, 0));
 				
-				JList list = new JList();
-				panel_2.add(list, BorderLayout.CENTER);
+				JList ListaDisponibles = new JList();
+				ListaDisponibles.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						index = ListaDisponibles.getSelectedIndex();
+						if(index!=-1) {
+							//BtnRegistrar.setEnabled(true);
+							}
+					}
+				});
+				panel_2.add(ListaDisponibles, BorderLayout.CENTER);
 			}
 			
 			JButton Derecha = new JButton(">>");
@@ -134,8 +146,8 @@ public class RegistroDeContrato extends JDialog {
 			panel_1.add(panel_2);
 			panel_2.setLayout(new BorderLayout(0, 0));
 			
-			JList list = new JList();
-			panel_2.add(list, BorderLayout.CENTER);
+			JList ListaSeleccionados = new JList();
+			panel_2.add(ListaSeleccionados, BorderLayout.CENTER);
 		}
 		{
 			JPanel buttonPane = new JPanel();

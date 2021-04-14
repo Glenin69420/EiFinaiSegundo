@@ -107,6 +107,22 @@ public class Empresa implements Serializable {
 		}
 
 	}
+	public static String TipoDeProyecto(Proyecto P) {
+		if(P.getTipoDeProyecto() == 1) {
+			return "Web";
+		}
+		if(P.getTipoDeProyecto() == 2) {
+			return "Movil";
+		}
+		 if(P.getTipoDeProyecto() == 3) {
+			return "Desktop";
+
+		}
+		return null;
+		
+		
+
+	}
 	public boolean confirmLogin(String Nombre, String Contraseña) {
 		boolean login = false;
 		for (Cliente C : MisClientes) {

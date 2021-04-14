@@ -14,7 +14,7 @@ public class Proyecto {
 		super();
 		this.empleados = Trabajadores;
 		this.descripcion = descripcion;
-		this.setNombre(Nombre);
+		this.Nombre = Nombre;
 		this.TipoDeProyecto = TipoDeProyecto;
 	}
 
