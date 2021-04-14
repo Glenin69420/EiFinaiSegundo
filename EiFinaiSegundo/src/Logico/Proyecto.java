@@ -57,4 +57,5 @@ public class Proyecto {
 	public void setTipoDeProyecto(int tipoDeProyecto) {
 		TipoDeProyecto = tipoDeProyecto;
 	}
+	//comentario x
 }
