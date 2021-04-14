@@ -120,7 +120,7 @@ public class Empresa implements Serializable {
 		}
 		return null;
 		
-		
+		//xD
 
 	}
 	public boolean confirmLogin(String Nombre, String Contraseña) {
