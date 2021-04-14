@@ -6,13 +6,15 @@ public class Proyecto {
 	private ArrayList<Trabajadora> empleados;
 	private String descripcion;
 	private Trabajadora jefe; //Todavia en duda
+	private String Nombre;
+	private String TipoDeProyecto;
 	
-	//Los ArrayList se inicializan en el constructor, no se ponen como parametro.
-	public Proyecto(String descripcion, Trabajadora jefe) {
+	
+	public Proyecto(String Nombre, String descripcion, ArrayList<Trabajadora> Trabajadores) {
 		super();
-		this.empleados = new ArrayList<Trabajadora>();
+		this.empleados = Trabajadores;
 		this.descripcion = descripcion;
-		this.jefe = jefe;
+		this.setNombre(Nombre);
 	}
 
 	public ArrayList<Trabajadora> getEmpleados() {
@@ -37,5 +39,13 @@ public class Proyecto {
 
 	public void setJefe(Trabajadora jefe) {
 		this.jefe = jefe;
+	}
+
+	public String getNombre() {
+		return Nombre;
+	}
+
+	public void setNombre(String nombre) {
+		Nombre = nombre;
 	}
 }
