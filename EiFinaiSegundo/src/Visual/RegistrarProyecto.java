@@ -148,4 +148,5 @@ public class RegistrarProyecto extends JDialog {
 			panel_3.add(list_1, BorderLayout.CENTER);
 		}
 	}
+	//xd
 }
