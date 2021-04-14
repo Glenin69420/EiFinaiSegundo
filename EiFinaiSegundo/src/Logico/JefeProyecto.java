@@ -23,6 +23,12 @@ public class JefeProyecto extends Trabajadora {
 	public float getSalario() {
 		return Salario;
 	}
+
+	@Override
+	public float Sueldo() {
+		float Total = 1500;
+		return Total;
+	}
 	
 	
 	
