@@ -24,7 +24,7 @@ public class Contrato {
 		this.nombre = nombre;
 		this.prorroga = 0;
 		this.penalidad = 0;
-		//this.penalidad = penalidad;
+		this.penalidad = 1000;
 		//this.prorroga = prorroga;
 
 	}
