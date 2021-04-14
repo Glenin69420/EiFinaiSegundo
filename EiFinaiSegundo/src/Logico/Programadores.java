@@ -28,6 +28,19 @@ public class Programadores extends Trabajadora {
 		return Salario;
 	}
 	
+
+	
+
+	public void setSalario(float salario) {
+		Salario = salario;
+	}
+
+	@Override
+	public float Sueldo() {
+		float Total = 1500;
+		return Total;
+	}
+	
 	
 	
 	

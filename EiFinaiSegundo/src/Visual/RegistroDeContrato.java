@@ -48,6 +48,7 @@ public class RegistroDeContrato extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		setLocationRelativeTo(null);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -83,23 +84,23 @@ public class RegistroDeContrato extends JDialog {
 			panel_1.setLayout(null);
 			{
 				JLabel Trabajadores = new JLabel("Tipos de proyectos:");
-				Trabajadores.setBounds(10, 34, 103, 14);
+				Trabajadores.setBounds(10, 34, 111, 14);
 				panel_1.add(Trabajadores);
 			}
 			{
 				JComboBox comboBox = new JComboBox();
-				comboBox.setBounds(111, 31, 122, 21);
+				comboBox.setBounds(126, 31, 122, 21);
 				panel_1.add(comboBox);
 			}
 			{
 				JPanel panel_2 = new JPanel();
+				panel_2.setBorder(new TitledBorder(null, "Proyectos Registrados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				panel_2.setBounds(10, 76, 200, 115);
 				panel_1.add(panel_2);
-				panel_2.setLayout(null);
+				panel_2.setLayout(new BorderLayout(0, 0));
 				
 				JList list = new JList();
-				list.setBounds(10, 11, 180, 93);
-				panel_2.add(list);
+				panel_2.add(list, BorderLayout.CENTER);
 			}
 			
 			JButton Derecha = new JButton(">>");
@@ -118,15 +119,6 @@ public class RegistroDeContrato extends JDialog {
 			Izquierda.setBounds(236, 142, 89, 23);
 			panel_1.add(Izquierda);
 			
-			JPanel panel_2 = new JPanel();
-			panel_2.setBounds(353, 76, 200, 115);
-			panel_1.add(panel_2);
-			panel_2.setLayout(null);
-			
-			JList list = new JList();
-			list.setBounds(10, 11, 180, 93);
-			panel_2.add(list);
-			
 			JLabel lblNewLabel_1 = new JLabel("Fecha de finalizaci\u00F3n:");
 			lblNewLabel_1.setBounds(279, 34, 103, 14);
 			panel_1.add(lblNewLabel_1);
@@ -135,19 +127,33 @@ public class RegistroDeContrato extends JDialog {
 			spinner_2.setModel(new SpinnerDateModel(new Date(1618372800000L), null, null, Calendar.DAY_OF_YEAR));
 			spinner_2.setBounds(392, 31, 161, 20);
 			panel_1.add(spinner_2);
+			
+			JPanel panel_2 = new JPanel();
+			panel_2.setBorder(new TitledBorder(null, "Proyectos Seleccionados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_2.setBounds(366, 76, 172, 115);
+			panel_1.add(panel_2);
+			panel_2.setLayout(new BorderLayout(0, 0));
+			
+			JList list = new JList();
+			panel_2.add(list, BorderLayout.CENTER);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton TerminarButton = new JButton("Terminar\r\n");
+				JButton TerminarButton = new JButton("Registrar");
 				TerminarButton.setActionCommand("OK");
 				buttonPane.add(TerminarButton);
 				getRootPane().setDefaultButton(TerminarButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar\r\n");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

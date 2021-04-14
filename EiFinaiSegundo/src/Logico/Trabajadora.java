@@ -2,7 +2,7 @@ package Logico;
 
 import java.io.Serializable;
 
-public class Trabajadora implements Serializable {
+public abstract class Trabajadora implements Serializable {
 	
 	/**
 	 * 
@@ -13,6 +13,8 @@ public class Trabajadora implements Serializable {
 	protected String Apellido;
 	protected String Direccion;
 	protected String Sexo;
+	protected float Sueldo;
+	//protected int Dias;
 	protected int Edad;// Puede ser un string
 	//protected float Salario;//Voy hacer que cada herencia tenga este atributo para que la clase diseno no este sola.
 	protected int Proyecto;
@@ -30,10 +32,19 @@ public class Trabajadora implements Serializable {
 		this.Proyecto++;
 		this.Codigo++;
 		this.Evaluacion = 0;
+		this.Sueldo = 0;
 	}
 
 	public String getIdentificador() {
 		return Identificador;
+	}
+	
+	public float getSueldo() {
+		return Sueldo;
+	}
+
+	public void setSueldo(float sueldo) {
+		Sueldo = sueldo;
 	}
 
 	public void setIdentificador(String identificador) {
@@ -88,7 +99,13 @@ public class Trabajadora implements Serializable {
 		return Evaluacion;
 	}
 	
-	// Habria que discutir sobre si tenga un metodo abdstracto.
+	
+	public abstract float Sueldo();
+	
+	public float CalculoSueldo(){
+		return (Sueldo());
+		
+	}
 	
 	
 	

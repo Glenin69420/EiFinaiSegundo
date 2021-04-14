@@ -17,6 +17,12 @@ public class Diseñador extends Trabajadora {
 	public float getSalario() {
 		return Salario;
 	}
+
+	@Override
+	public float Sueldo() {
+		float Total = 1000;
+		return Total;
+	}
 	
 	
 	
