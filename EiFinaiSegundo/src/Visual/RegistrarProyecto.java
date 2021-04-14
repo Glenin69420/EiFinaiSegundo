@@ -10,6 +10,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
+
+import Logico.Empresa;
+import Logico.Proyecto;
+import Logico.Trabajadora;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
@@ -21,11 +26,22 @@ import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.border.MatteBorder;
 import javax.swing.JList;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class RegistrarProyecto extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
+	private JTextField TxtNombre;
+	private int index = -1;
+	private int indexBack = -1;
+	private JList ListaSeleccionados;
+	private JList ListaDisponibles;
+	private ArrayList<String> disponibles;
+	private ArrayList<String> Seleccionados;
+	private String Seleccion = "<Todos>";
 
 	/**
 	 * Launch the application.
@@ -46,7 +62,7 @@ public class RegistrarProyecto extends JDialog {
 	public RegistrarProyecto() {
 		getContentPane().setForeground(Color.GRAY);
 		setTitle("Proyectos");
-		setBounds(100, 100, 554, 529);
+		setBounds(100, 100, 554, 560);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
@@ -75,22 +91,21 @@ public class RegistrarProyecto extends JDialog {
 			lblNewLabel_1.setFont(new Font("Arial Black", Font.PLAIN, 28));
 			lblNewLabel_1.setBounds(10, 10, 456, 29);
 			panel_1.add(lblNewLabel_1);
-			
 			JLabel lblNewLabel_2 = new JLabel("Nombre:");
 			lblNewLabel_2.setBounds(166, 93, 61, 13);
 			panel.add(lblNewLabel_2);
 			
-			textField = new JTextField();
-			textField.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
-			textField.setBounds(270, 91, 247, 19);
-			panel.add(textField);
-			textField.setColumns(10);
+			TxtNombre = new JTextField();
+			TxtNombre.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
+			TxtNombre.setBounds(270, 91, 247, 19);
+			panel.add(TxtNombre);
+			TxtNombre.setColumns(10);
 			
-			JButton btnNewButton = new JButton("Registrar");
-			btnNewButton.setForeground(Color.WHITE);
-			btnNewButton.setBackground(Color.BLUE);
-			btnNewButton.setBounds(111, 439, 98, 21);
-			panel.add(btnNewButton);
+			JButton BtnCrar = new JButton("Registrar");
+			BtnCrar.setForeground(Color.WHITE);
+			BtnCrar.setBackground(Color.BLUE);
+			BtnCrar.setBounds(111, 468, 98, 21);
+			panel.add(BtnCrar);
 			
 			JButton btnNewButton_1 = new JButton("Cancelar");
 			btnNewButton_1.setForeground(Color.WHITE);
@@ -100,53 +115,119 @@ public class RegistrarProyecto extends JDialog {
 					dispose();
 				}
 			});
-			btnNewButton_1.setBounds(320, 439, 98, 21);
+			btnNewButton_1.setBounds(320, 468, 98, 21);
 			panel.add(btnNewButton_1);
 			
 			JLabel lblNewLabel_3 = new JLabel("Tipo de proyecto:");
 			lblNewLabel_3.setBounds(166, 128, 98, 13);
 			panel.add(lblNewLabel_3);
 			
-			JComboBox comboBox = new JComboBox();
-			comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
-			comboBox.setBounds(270, 124, 247, 21);
-			panel.add(comboBox);
+			JComboBox TipoCombo = new JComboBox();
+			TipoCombo.setModel(new DefaultComboBoxModel(new String[] {"Wed", "Mobile", "Desktop", "xD", "lol"}));
+			TipoCombo.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
+			TipoCombo.setBounds(270, 124, 247, 21);
+			panel.add(TipoCombo);
 			
 			JLabel lblNewLabel_4 = new JLabel("Descripcion:");
 			lblNewLabel_4.setBounds(166, 162, 85, 13);
 			panel.add(lblNewLabel_4);
 			
-			JTextArea textArea = new JTextArea();
-			textArea.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
-			textArea.setBounds(270, 162, 247, 58);
-			panel.add(textArea);
+			JTextArea TxtArea = new JTextArea();
+			TxtArea.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
+			TxtArea.setBounds(270, 162, 247, 58);
+			panel.add(TxtArea);
 			
 			JPanel panel_2 = new JPanel();
 			panel_2.setBorder(new TitledBorder(null, "Empleados disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_2.setBounds(20, 238, 195, 164);
+			panel_2.setBounds(20, 265, 195, 164);
 			panel.add(panel_2);
 			panel_2.setLayout(new BorderLayout(0, 0));
 			
-			JList list = new JList();
-			panel_2.add(list, BorderLayout.CENTER);
+			ListaDisponibles = new JList();
+			ListaDisponibles.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					index = ListaDisponibles.getSelectedIndex();
+					if(index!=-1) {
+						BtnCrar.setEnabled(true);
+						}
+				}
+			});
+			panel_2.add(ListaDisponibles, BorderLayout.CENTER);
 			
-			JButton btnNewButton_2 = new JButton(">>");
-			btnNewButton_2.setBounds(225, 280, 85, 21);
-			panel.add(btnNewButton_2);
+			JButton BtnRegistrar = new JButton(">>");
+			BtnRegistrar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(ListaDisponibles.getSelectedIndex()!=-1) {
+						Seleccionados.add(disponibles.get(ListaDisponibles.getSelectedIndex()));
+						disponibles.remove(ListaDisponibles.getSelectedIndex());
+						ListaDisponibles.removeAll();
+						ListaSeleccionados.removeAll();
+						ListaDisponibles.setListData(disponibles.toArray());
+						ListaSeleccionados.setListData(Seleccionados.toArray());
+						BtnRegistrar.setEnabled(false);
+						
+					}
+					
+				}
+			});
+			BtnRegistrar.setBounds(225, 314, 85, 21);
+			panel.add(BtnRegistrar);
 			
-			JButton btnNewButton_3 = new JButton("<<");
-			btnNewButton_3.setBounds(225, 320, 85, 21);
-			panel.add(btnNewButton_3);
+			JButton BtnVolver = new JButton("<<");
+			BtnVolver.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(ListaSeleccionados.getSelectedIndex() != -1) {
+						disponibles.add(Seleccionados.get(ListaSeleccionados.getSelectedIndex()));
+						Seleccionados.remove(ListaSeleccionados.getSelectedIndex());
+						ListaDisponibles.removeAll();
+						ListaSeleccionados.removeAll();;
+						ListaDisponibles.setListData(disponibles.toArray());
+						ListaSeleccionados.setListData(Seleccionados.toArray());
+						BtnVolver.setEnabled(false);
+					}
+				}
+			});
+			BtnVolver.setBounds(225, 361, 85, 21);
+			panel.add(BtnVolver);
 			
 			JPanel panel_3 = new JPanel();
-			panel_3.setBounds(320, 238, 197, 164);
+			panel_3.setBorder(new TitledBorder(null, "Empleados seleccionados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_3.setBounds(320, 265, 195, 164);
 			panel.add(panel_3);
 			panel_3.setLayout(new BorderLayout(0, 0));
 			
-			JList list_1 = new JList();
-			list_1.setBorder(new TitledBorder(null, "Empleados seleccionados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_3.add(list_1, BorderLayout.CENTER);
+			ListaSeleccionados = new JList();
+			ListaSeleccionados.setLocation(0, 265);
+			ListaSeleccionados.setSize(195, 164);
+			ListaSeleccionados.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if(ListaSeleccionados.getSelectedIndex()!=-1) {
+						BtnVolver.setEnabled(true);
+					}
+					
+					
+				}
+			});
+			panel_3.add(ListaSeleccionados, BorderLayout.CENTER);
+			
+			JComboBox comboBox = new JComboBox();
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "<Jefe de proyecto>", "<Programador>", "<Planificador>", "<Dise\u00F1ador>"}));
+			comboBox.setBounds(20, 234, 189, 21);
+			panel.add(comboBox);
 		}
+		CargarDisponibles(Seleccion);
 	}
-	//xd
+	private void CargarDisponibles(String seleccion) {
+		disponibles = new ArrayList<String>();
+		Seleccionados = new ArrayList<String>();
+		if(seleccion.equalsIgnoreCase("<Todos>")){
+		for(Proyecto P:Empresa.getInstance().getMisProyectos()) {
+			disponibles.add("Nombre:"+P.getNombre()+":"+"Tipo"+":"+Empresa.TipoDeProyecto(P));
+		}
+		}
+		ListaDisponibles.removeAll();
+		ListaDisponibles.setListData(disponibles.toArray());
+	}
 }
