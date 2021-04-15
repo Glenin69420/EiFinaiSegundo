@@ -9,11 +9,14 @@ public class JefeProyecto extends Trabajadora {
 	protected int CantidadDeTrabajadores;
 	protected float Salario;
 	
+	
 	public JefeProyecto(String identificador, String nombre, String apellido, int edad, String sexo, String direccion,
 			int cantidadDeTrabajadores) {
 		super(identificador, nombre, apellido, direccion, sexo, edad);
 		CantidadDeTrabajadores = cantidadDeTrabajadores;
-		this.Salario = 0;
+		this.Salario =0;
+		
+
 	}
 
 	public int getCantidadDeTrabajadores() {
@@ -24,13 +27,18 @@ public class JefeProyecto extends Trabajadora {
 		return Salario;
 	}
 
-	@Override
-	public float Sueldo() {
-		float Total = 1500;
-		return Total;
+	public void setSalario(float salario) {
+		Salario = salario;
 	}
 	
+
+
 	
+	public float Sueldo() {
+		float Total = 5000;
+		setSalario(Total);
+		return Salario;
+	}
 	
 	
 	

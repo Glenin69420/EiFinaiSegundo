@@ -24,11 +24,15 @@ public class Planificadores extends Trabajadora {
 		return Salario;
 	}
 
-	@Override
-	public float Sueldo() {
-		float Total = 1200;
-		return Total;
+	public void setSalario(float salario) {
+		Salario = salario;
 	}
+	public float Sueldo() {
+		float Total = 3000;
+		setSalario(Total);
+		return Salario;
+	}
+	
 	
 	
 

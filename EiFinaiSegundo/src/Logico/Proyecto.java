@@ -15,6 +15,8 @@ public class Proyecto implements Serializable{
 	private String TipoDeProyecto; //1. Web 2. Movil 3. Desktop 
 	private static int codigo = 1;
 	private String Indentificacion;
+	private Trabajadora Trabajador;
+	private float Total;
 	
 	
 	public Proyecto(String Nombre, String Indentificacion, String descripcion, ArrayList<Trabajadora> Trabajadores, String TipoDeProyecto) {
@@ -25,6 +27,7 @@ public class Proyecto implements Serializable{
 		this.TipoDeProyecto = TipoDeProyecto;
 		this.codigo++;
 		this.Indentificacion = Indentificacion;
+		this.Total = 0;
 		
 	}
 
@@ -32,6 +35,30 @@ public class Proyecto implements Serializable{
 		return empleados;
 	}
 	
+	
+	public static int getCodigo() {
+		return codigo;
+	}
+
+	public static void setCodigo(int codigo) {
+		Proyecto.codigo = codigo;
+	}
+
+	public float getTotal() {
+		return Total;
+	}
+
+	public void setTotal(float total) {
+		Total = total;
+	}
+
+	public Trabajadora getTrabajador() {
+		return Trabajador;
+	}
+
+	public void setTrabajador(Trabajadora trabajador) {
+		Trabajador = trabajador;
+	}
 
 	public String getIndentificacion() {
 		return Indentificacion;

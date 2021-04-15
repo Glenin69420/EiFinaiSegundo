@@ -122,22 +122,7 @@ public class Empresa implements Serializable {
 		}
 
 	}
-	/*public static String TipoDeProyecto(Proyecto P) {
-		if(P.getTipoDeProyecto().equalsIgnoreCase("Web")) {
-			return "Web";
-		}
-		if(P.getTipoDeProyecto().equalsIgnoreCase("Mobile")) {
-			return "Mobile";
-		}
-		 if(P.getTipoDeProyecto().equalsIgnoreCase("Desktop")) {
-			return "Desktop";
-
-		}
-		return null;
-		
-		//xD
-
-	}*/
+	
 	public boolean confirmLogin(String Nombre, String Contraseña) {
 		boolean login = false;
 		for (Cliente C : MisClientes) {

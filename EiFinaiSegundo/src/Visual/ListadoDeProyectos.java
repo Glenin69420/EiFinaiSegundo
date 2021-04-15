@@ -144,7 +144,7 @@ public class ListadoDeProyectos extends JDialog {
 				table = new JTable();
 				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				Model = new DefaultTableModel();
-				String[] Headers = {"Codigo","Nombre","Tipo de Proyecto"};
+				String[] Headers = {"Codigo","Nombre","Tipo de Proyecto","Total"};
 				Model.setColumnIdentifiers(Headers);
 				table.setModel(Model);
 				table.setFont(new Font("Verdana", Font.PLAIN, 17));
@@ -223,6 +223,7 @@ public class ListadoDeProyectos extends JDialog {
 				Filas[0] = T.getIndentificacion();
 				Filas[1] = T.getNombre();
 				Filas[2] = T.getTipoDeProyecto();
+				Filas[3] = T.getTotal();
 				
 				Model.addRow(Filas);
 			}

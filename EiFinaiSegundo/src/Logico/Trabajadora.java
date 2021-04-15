@@ -20,6 +20,7 @@ public abstract class Trabajadora implements Serializable {
 	protected int Proyecto;
 	protected int Evaluacion;
 	public static int Codigo = 1;
+	public int Total = 1;
 	
 	public Trabajadora(String identificador, String nombre, String apellido, String direccion, String sexo, int edad) {
 		super();
@@ -32,7 +33,7 @@ public abstract class Trabajadora implements Serializable {
 		this.Proyecto++;
 		this.Codigo++;
 		this.Evaluacion = 0;
-		this.Sueldo = 0;
+		//this.Sueldo = 0;
 	}
 
 	public String getIdentificador() {
@@ -103,7 +104,7 @@ public abstract class Trabajadora implements Serializable {
 	public abstract float Sueldo();
 	
 	public float CalculoSueldo(){
-		return (Sueldo());
+		return Sueldo();
 		
 	}
 	

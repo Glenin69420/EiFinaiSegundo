@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 
+import Logico.Cliente;
 import Logico.Empresa;
 import Logico.Proyecto;
 import Logico.Trabajadora;
@@ -53,6 +54,7 @@ public class RegistrarProyecto extends JDialog {
 	private JComboBox TipoCombo;
 	private JTextArea TxtArea;
 	private String seleccion = "<Web>";
+	private JTextField TxtPrecio;
 
 	/**
 	 * Launch the application.
@@ -74,7 +76,7 @@ public class RegistrarProyecto extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarProyecto.class.getResource("/Imagenes/proyecto.png")));
 		getContentPane().setForeground(Color.GRAY);
 		setTitle("Proyectos");
-		setBounds(100, 100, 554, 560);
+		setBounds(100, 100, 554, 570);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
@@ -123,8 +125,10 @@ public class RegistrarProyecto extends JDialog {
 					    P.add(Empresa.getInstance().BuscarTrabajador(splits[1]));
 					    Empresa.getInstance().EliminarTrabajador(Empresa.getInstance().BuscarTrabajador(splits[1]));
 					}
-					String aux = ""+Empresa.ProyectoCod++;
+					String aux = "P-"+Empresa.ProyectoCod++;
 					Proyecto p = new Proyecto(TxtNombre.getText(), aux, TxtArea.getText(), P,TipoCombo.getSelectedItem().toString());
+					float Cambio = Float.parseFloat(TxtPrecio.getText());
+					p.setTotal(Cambio);
 					Empresa.getInstance().InsertarProyecto(p);
 					JOptionPane.showMessageDialog(null, "El proyecto se ha registrado", "Registro completado", JOptionPane.INFORMATION_MESSAGE);
 					
@@ -132,7 +136,7 @@ public class RegistrarProyecto extends JDialog {
 			});
 			BtnCrar.setForeground(Color.WHITE);
 			BtnCrar.setBackground(Color.BLUE);
-			BtnCrar.setBounds(111, 468, 98, 21);
+			BtnCrar.setBounds(111, 480, 98, 21);
 			panel.add(BtnCrar);
 			
 			JButton btnNewButton_1 = new JButton("Cancelar");
@@ -143,7 +147,7 @@ public class RegistrarProyecto extends JDialog {
 					dispose();
 				}
 			});
-			btnNewButton_1.setBounds(320, 468, 98, 21);
+			btnNewButton_1.setBounds(320, 480, 98, 21);
 			panel.add(btnNewButton_1);
 			
 			JLabel lblNewLabel_3 = new JLabel("Tipo de proyecto:");
@@ -197,6 +201,16 @@ public class RegistrarProyecto extends JDialog {
 						ListaDisponibles.setListData(disponibles.toArray());
 						ListaSeleccionados.setListData(Seleccionados.toArray());
 						BtnRegistrar.setEnabled(false);
+						float precioTotal = 0;
+						for(int i=0; i<Seleccionados.size();i++) {
+							String[] aux = Seleccionados.get(i).split(":");
+							precioTotal+= Empresa.getInstance().BuscarTrabajador(aux[1]).CalculoSueldo();
+							
+							
+							
+							
+						}
+						TxtPrecio.setText(""+precioTotal);
 						
 					}
 					
@@ -217,6 +231,15 @@ public class RegistrarProyecto extends JDialog {
 						ListaDisponibles.setListData(disponibles.toArray());
 						ListaSeleccionados.setListData(Seleccionados.toArray());
 						BtnVolver.setEnabled(false);
+						float precioTotal = 0;
+						for(int i=0; i<Seleccionados.size();i++) {
+							String[] aux = Seleccionados.get(i).split(":");
+							precioTotal+= Empresa.getInstance().BuscarTrabajador(aux[1]).Sueldo();
+							Empresa.getInstance().BuscarTrabajador(aux[1]).setSueldo(precioTotal);
+						}
+						TxtPrecio.setText(""+precioTotal);
+						
+					
 					}
 				}
 			});
@@ -250,6 +273,15 @@ public class RegistrarProyecto extends JDialog {
 			comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "<Jefe de proyecto>", "<Programador>", "<Planificador>", "<Dise\u00F1ador>"}));
 			comboBox.setBounds(20, 234, 189, 21);
 			panel.add(comboBox);
+			
+			JLabel lblNewLabel_5 = new JLabel("Salario total:");
+			lblNewLabel_5.setBounds(320, 439, 79, 13);
+			panel.add(lblNewLabel_5);
+			
+			TxtPrecio = new JTextField();
+			TxtPrecio.setBounds(393, 436, 120, 19);
+			panel.add(TxtPrecio);
+			TxtPrecio.setColumns(10);
 		}
 		CargarDisponibles(Seleccion);
 	}
