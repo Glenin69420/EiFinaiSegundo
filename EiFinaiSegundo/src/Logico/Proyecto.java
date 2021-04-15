@@ -76,20 +76,5 @@ public class Proyecto implements Serializable{
 	public void setTipoDeProyecto(String tipoDeProyecto) {
 		TipoDeProyecto = tipoDeProyecto;
 	}
-	public static String TipoDeProyecto(Proyecto P) {
-		if(P.getTipoDeProyecto().equalsIgnoreCase("Web")) {
-			return "Web";
-		}
-		if(P.getTipoDeProyecto().equalsIgnoreCase("Mobile")) {
-			return "Mobile";
-		}
-		 if(P.getTipoDeProyecto().equalsIgnoreCase("Desktop")) {
-			return "Desktop";
-
-		}
-		return null;
-		
-		
-	}
-	//comentario xdd
+	
 }
