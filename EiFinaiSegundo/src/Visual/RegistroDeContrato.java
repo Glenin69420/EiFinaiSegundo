@@ -267,7 +267,7 @@ public class RegistroDeContrato extends JDialog {
 					Contrato p = new Contrato(TxtNombre.getText(), aux, Empresa.getInstance().BuscarCliente(TxtCliente.getText()), (Date)SpnInicio.getValue(),
 							(Date)SpnFinal.getValue());
 					float Cambio = Float.parseFloat(TxtPrecio.getText());
-					p.setTotal(Cambio*2);
+					p.setTotal(Cambio*30);
 					Empresa.getInstance().InsertarContrato(p);
 					JOptionPane.showMessageDialog(null, "Se ha concretado el contrato", "Registro completado", JOptionPane.INFORMATION_MESSAGE);
 					

@@ -15,6 +15,7 @@ import Logico.Empresa;
 import Logico.JefeProyecto;
 import Logico.Planificadores;
 import Logico.Programadores;
+import Logico.Proyecto;
 import Logico.Trabajadora;
 
 import javax.swing.JMenuBar;
@@ -34,6 +35,7 @@ import javax.swing.border.TitledBorder;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.JButton;
@@ -208,6 +210,11 @@ public class ProyectoPrincipal extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Grafico pastel");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GraficoTrabajadores();
+			}
+		});
 		btnNewButton.setBounds(293, 74, 138, 21);
 		panel.add(btnNewButton);
 		
@@ -222,6 +229,11 @@ public class ProyectoPrincipal extends JFrame {
 		panel_1.setLayout(null);
 		
 		JButton btnNewButton_1 = new JButton("Grafico de barras");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GraficoProyectos();
+			}
+		});
 		btnNewButton_1.setBounds(418, 79, 150, 21);
 		panel_1.add(btnNewButton_1);
 		
@@ -237,4 +249,68 @@ public class ProyectoPrincipal extends JFrame {
 		super.setSize(dim.width, dim.height-45);
 		setLocationRelativeTo(null);
 	}
+	
+	private void GraficoTrabajadores() {
+        DefaultPieDataset data = new DefaultPieDataset();
+        int jefeProyectos = 0;
+        int programadores = 0;
+        int planificadores = 0;
+        int disennador = 0;
+        for(Trabajadora t : Empresa.getInstance().getMisTrabajadores()) {
+            if(t != null) {
+                if(t instanceof JefeProyecto) {
+                    jefeProyectos++;
+                }
+                if(t instanceof Programadores) {
+                    programadores++;
+                }
+                if(t instanceof Planificadores) {
+                    planificadores++;
+                }
+                if(t instanceof Diseñador) {
+                    disennador++; 
+                }
+            }
+        }
+        data.setValue("Jefes de proyectos", jefeProyectos);
+        data.setValue("Programadores", programadores);
+        data.setValue("planificadores", planificadores);
+        data.setValue("Diseñadores", disennador);
+
+        JFreeChart chart = ChartFactory.createPieChart("Trabajadores", data, true, true, false);
+
+        ChartFrame frame = new ChartFrame("Información sobre trabajadores", chart);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    private void GraficoProyectos() {
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        int web = 0;
+        int movil = 0;
+        int desktop = 0;
+        for(Proyecto t : Empresa.getInstance().getMisProyectos()) {
+            if(t != null) {
+                if(t.getTipoDeProyecto().equalsIgnoreCase("Web")) {
+                    web++;
+                }
+                if(t.getTipoDeProyecto().equalsIgnoreCase("Movil")) {
+                    movil++;
+                }
+                if(t.getTipoDeProyecto().equalsIgnoreCase("Web")) {
+                    desktop++;
+                }
+            }
+        }
+        data.setValue(web, "Proyectos webs", "");
+        data.setValue(movil, "proyectos para moviles", "");
+        data.setValue(desktop, "proyectos para desktop", "");
+
+        JFreeChart chart = ChartFactory.createBarChart3D("Tipos de proyectos disponibles", "Tipos de proyectos", "Cantidad", 
+                data);
+
+        ChartFrame frame = new ChartFrame("Información sobre trabajadores", chart);
+        frame.pack();
+        frame.setVisible(true);
+    }
 }
