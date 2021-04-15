@@ -306,6 +306,4 @@ public class RegistroDeContrato extends JDialog {
 		ListaDisponibles.removeAll();
 		ListaDisponibles.setListData(disponibles.toArray());
 	}
-	
-	//comentario xd
 }
