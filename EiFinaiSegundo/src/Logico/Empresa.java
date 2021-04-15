@@ -4,10 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Empresa implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4736481894836561533L;
 	private ArrayList<Trabajadora> MisTrabajadores;
 	private ArrayList<Cliente> MisClientes;
