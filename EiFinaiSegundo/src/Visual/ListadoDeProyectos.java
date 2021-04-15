@@ -222,7 +222,7 @@ public class ListadoDeProyectos extends JDialog {
 			if(T != null) {	
 				Filas[0] = T.getIndentificacion();
 				Filas[1] = T.getNombre();
-				Filas[2] = Empresa.getInstance().TipoDeProyecto(T);
+				Filas[2] = T.getTipoDeProyecto();
 				
 				Model.addRow(Filas);
 			}

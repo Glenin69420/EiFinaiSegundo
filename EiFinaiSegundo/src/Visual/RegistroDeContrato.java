@@ -208,7 +208,7 @@ public class RegistroDeContrato extends JDialog {
 		Seleccionados = new ArrayList<String>();
 		if(seleccion.equalsIgnoreCase("<Todos>")){
 		for(Proyecto P: Empresa.getInstance().getMisProyectos()) {
-			disponibles.add("Nombre: "+P.getNombre()+" : "+"Tipo"+": "+Empresa.TipoDeProyecto(P));
+			//disponibles.add("Nombre: "+P.getNombre()+" : "+"Tipo"+": "+Empresa.TipoDeProyecto(P));
 		}
 		}
 		ListaDisponibles.removeAll();

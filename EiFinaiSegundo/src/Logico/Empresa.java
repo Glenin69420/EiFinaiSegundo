@@ -122,7 +122,7 @@ public class Empresa implements Serializable {
 		}
 
 	}
-	public static String TipoDeProyecto(Proyecto P) {
+	/*public static String TipoDeProyecto(Proyecto P) {
 		if(P.getTipoDeProyecto().equalsIgnoreCase("Web")) {
 			return "Web";
 		}
@@ -137,7 +137,7 @@ public class Empresa implements Serializable {
 		
 		//xD
 
-	}
+	}*/
 	public boolean confirmLogin(String Nombre, String Contraseña) {
 		boolean login = false;
 		for (Cliente C : MisClientes) {

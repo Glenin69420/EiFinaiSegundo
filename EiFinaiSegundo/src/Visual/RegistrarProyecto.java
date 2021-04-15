@@ -35,6 +35,7 @@ import java.util.Date;
 
 
 import javax.swing.ListSelectionModel;
+import java.awt.Toolkit;
 
 public class RegistrarProyecto extends JDialog {
 
@@ -70,6 +71,7 @@ public class RegistrarProyecto extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistrarProyecto() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarProyecto.class.getResource("/Imagenes/proyecto.png")));
 		getContentPane().setForeground(Color.GRAY);
 		setTitle("Proyectos");
 		setBounds(100, 100, 554, 560);
