@@ -10,7 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Logico.Diseñador;
 import Logico.Empresa;
+import Logico.JefeProyecto;
+import Logico.Planificadores;
+import Logico.Programadores;
+import Logico.Trabajadora;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -24,6 +29,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import javax.swing.border.TitledBorder;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
+import javax.swing.JButton;
 
 public class ProyectoPrincipal extends JFrame {
 
@@ -184,8 +197,40 @@ public class ProyectoPrincipal extends JFrame {
 		mnNewMenu_2.add(mntmNewMenuItem_5);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		DefaultPieDataset data = new DefaultPieDataset();
+		int jefeProyectos = 0;
+		int programadores = 0;
+		int planificadores = 0;
+		int disennador = 0;
+		for(Trabajadora t : Empresa.getInstance().getMisTrabajadores()) {
+			if(t != null) {
+				if(t instanceof JefeProyecto) {
+					jefeProyectos++;
+				}
+				if(t instanceof Programadores) {
+					programadores++;
+				}
+				if(t instanceof Planificadores) {
+					planificadores++;
+				}
+				if(t instanceof Diseñador) {
+					disennador++;
+				}
+			}
+		}
+		data.setValue("Jefes de proyectos", jefeProyectos);
+		data.setValue("Programadores", programadores);
+		data.setValue("planificadores", planificadores);
+		data.setValue("Diseñadores", disennador);
+		
+		JFreeChart chart = ChartFactory.createPieChart("Trabajadores", data, true, true, false);
+		
+		ChartFrame frame = new ChartFrame("equisde", chart);
+		frame.pack();
+		frame.setVisible(true);
 		
 		setResizable(false);
 		contentPane = new JPanel();
@@ -194,5 +239,4 @@ public class ProyectoPrincipal extends JFrame {
 		super.setSize(dim.width, dim.height-45);
 		setLocationRelativeTo(null);
 	}
-
 }
