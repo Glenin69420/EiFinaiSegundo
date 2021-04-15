@@ -12,10 +12,14 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 
+import Logico.Cliente;
+import Logico.Contrato;
 import Logico.Empresa;
 import Logico.Proyecto;
 import Logico.Trabajadora;
@@ -38,7 +42,7 @@ import javax.swing.border.EtchedBorder;
 public class RegistroDeContrato extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField CodigoCliente;
+	private JTextField TxtCliente;
 	private int index = -1;
 	private int indexBack = -1;
 	private ArrayList<String> disponibles;
@@ -47,9 +51,9 @@ public class RegistroDeContrato extends JDialog {
 	private JList ListaSeleccionados;
 	private JSpinner SpnFinal;
 	private JComboBox comboBox;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JSpinner spinner;
+	private JTextField TxtNombre;
+	private JTextField TxtCodigo;
+	private JSpinner SpnInicio;
 	private JTextField TxtPrecio;
 	private JButton BtnRegistrar;
 	private JButton BtnVolver;
@@ -94,10 +98,10 @@ public class RegistroDeContrato extends JDialog {
 		lblCodigoCliente.setBounds(10, 29, 91, 14);
 		panel.add(lblCodigoCliente);
 		{
-			CodigoCliente = new JTextField();
-			CodigoCliente.setBounds(100, 26, 144, 20);
-			panel.add(CodigoCliente);
-			CodigoCliente.setColumns(10);
+			TxtCliente = new JTextField();
+			TxtCliente.setBounds(100, 26, 144, 20);
+			panel.add(TxtCliente);
+			TxtCliente.setColumns(10);
 		}
 		{
 			JPanel panel_1 = new JPanel();
@@ -225,32 +229,51 @@ public class RegistroDeContrato extends JDialog {
 			lblNewLabel_3.setBounds(158, 38, 52, 13);
 			panel_1.add(lblNewLabel_3);
 			
-			textField = new JTextField();
-			textField.setBounds(158, 55, 373, 19);
-			panel_1.add(textField);
-			textField.setColumns(10);
+			TxtNombre = new JTextField();
+			TxtNombre.setBounds(158, 55, 373, 19);
+			panel_1.add(TxtNombre);
+			TxtNombre.setColumns(10);
 			
 			JLabel lblNewLabel_4 = new JLabel("Codigo:");
 			lblNewLabel_4.setBounds(158, 83, 45, 13);
 			panel_1.add(lblNewLabel_4);
 			
-			textField_1 = new JTextField();
-			textField_1.setEditable(false);
-			textField_1.setBounds(158, 96, 96, 19);
-			panel_1.add(textField_1);
-			textField_1.setColumns(10);
+			TxtCodigo = new JTextField();
+			TxtCodigo.setEditable(false);
+			TxtCodigo.setBounds(158, 96, 96, 19);
+			panel_1.add(TxtCodigo);
+			TxtCodigo.setColumns(10);
 			
 			JLabel lblNewLabel_5 = new JLabel("Fecha de inicio:");
 			lblNewLabel_5.setBounds(158, 125, 89, 13);
 			panel_1.add(lblNewLabel_5);
 			
 		
-			spinner = new JSpinner();
-			spinner.setBounds(158, 139, 161, 20);
-			spinner.setModel(new SpinnerDateModel(new Date(1618459200000L), null, null, Calendar.DAY_OF_YEAR));
-			panel_1.add(spinner);
+			SpnInicio = new JSpinner();
+			SpnInicio.setBounds(158, 139, 161, 20);
+			SpnInicio.setModel(new SpinnerDateModel(new Date(1618459200000L), null, null, Calendar.DAY_OF_YEAR));
+			panel_1.add(SpnInicio);
 			
 			JButton btnNewButton = new JButton("Registrar");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ArrayList<Proyecto> P = new ArrayList<Proyecto>();
+					for (int i = 0; i <Seleccionados.size(); i++) {
+						String[] splits = Seleccionados.get(i).split(":");
+					    P.add(Empresa.getInstance().BuscarProyecto(splits[1]));
+					    Empresa.getInstance().ElimininarProyectos(Empresa.getInstance().BuscarProyecto(splits[1]));
+					}
+					String aux = "C-"+Empresa.ContratoCod++;
+					Contrato p = new Contrato(TxtNombre.getText(), aux, Empresa.getInstance().BuscarCliente(TxtCliente.getText()), (Date)SpnInicio.getValue(),
+							(Date)SpnFinal.getValue());
+					float Cambio = Float.parseFloat(TxtPrecio.getText());
+					p.setTotal(Cambio);
+					Empresa.getInstance().InsertarContrato(p);
+					JOptionPane.showMessageDialog(null, "Se ha concretado el contrato", "Registro completado", JOptionPane.INFORMATION_MESSAGE);
+					
+					
+				}
+			});
 			btnNewButton.setForeground(Color.WHITE);
 			btnNewButton.setBackground(Color.BLUE);
 			btnNewButton.setBounds(128, 395, 88, 21);

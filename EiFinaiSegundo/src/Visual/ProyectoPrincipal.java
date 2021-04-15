@@ -138,6 +138,16 @@ public class ProyectoPrincipal extends JFrame {
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_7);
 		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Contratos");
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoDeContratos C = new ListadoDeContratos();
+				C.setVisible(true);
+				C.setResizable(false);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_9);
+		
 		JMenu mnNewMenu_3 = new JMenu("Creaciones");
 		menuBar.add(mnNewMenu_3);
 		
@@ -160,20 +170,10 @@ public class ProyectoPrincipal extends JFrame {
 		});
 		mnNewMenu_3.add(mntmNewMenuItem_8);
 		
-		JMenu mnNewMenu_2 = new JMenu("Prueba");
+		JMenu mnNewMenu_2 = new JMenu("Consultas");
 		menuBar.add(mnNewMenu_2);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Login");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Login L = new Login();
-				L.setVisible(true);
-				L.setModal(false);
-			}
-		});
-		mnNewMenu_2.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Consultar");
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Contrato");
 		mntmNewMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConsultarImformacion I = new ConsultarImformacion();

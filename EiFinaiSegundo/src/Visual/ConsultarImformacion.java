@@ -64,15 +64,15 @@ public class ConsultarImformacion extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
-				JLabel lblNewLabel = new JLabel("Codigo del cliente:");
+				JLabel lblNewLabel = new JLabel("Codigo del contrato:");
 				lblNewLabel.setForeground(Color.BLUE);
-				lblNewLabel.setBounds(10, 78, 108, 13);
+				lblNewLabel.setBounds(10, 78, 120, 13);
 				panel.add(lblNewLabel);
 			}
 			{
 				TxtCodigo = new JTextField();
 				TxtCodigo.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
-				TxtCodigo.setBounds(117, 76, 96, 19);
+				TxtCodigo.setBounds(130, 76, 96, 19);
 				panel.add(TxtCodigo);
 				TxtCodigo.setColumns(10);
 			}

@@ -1,10 +1,15 @@
 package Logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Contrato {
+public class Contrato implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5226259320313762546L;
 	private Date fechaInicio;
 	private Date fechaDeExpiro;
 	private String identificador;
@@ -13,18 +18,20 @@ public class Contrato {
 	private float penalidad;
 	private int prorroga;
 	private Cliente cliente;
+	private float Total;
 	
 	public Contrato(String Nombre, String identificador , Cliente cliente, Date fechaInicio, Date fechaDeExpiro
 			) {
 		super();
-		this.fechaInicio = new java.util.Date();
+		this.fechaInicio = fechaInicio;
 		this.fechaDeExpiro = fechaDeExpiro;
 		this.identificador = identificador;
 		this.cliente = cliente;
-		this.nombre = nombre;
+		this.nombre = Nombre;
 		this.prorroga = 0;
 		//this.penalidad = 0;
 		this.penalidad = 1000;
+		this.Total = 0;
 		//this.prorroga = prorroga;
 
 	}
@@ -33,6 +40,14 @@ public class Contrato {
 		return fechaInicio;
 	}
 	
+
+	public float getTotal() {
+		return Total;
+	}
+
+	public void setTotal(float total) {
+		Total = total;
+	}
 
 	public Cliente getCliente() {
 		return cliente;

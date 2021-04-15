@@ -16,6 +16,7 @@ public class Empresa implements Serializable {
 	private static Empresa Centro = null;
 	private static Cliente loginCliente;
 	public static int ProyectoCod = 1;
+	public static int ContratoCod = 1;
 
 	public Empresa() {
 		super();
@@ -66,8 +67,14 @@ public class Empresa implements Serializable {
 	public void InsertarProyecto(Proyecto proyecto) {
 		MisProyectos.add(proyecto);
 	} 
+	public void InsertarContrato(Contrato contrato) {
+		MisContratos.add(contrato);
+	} 
 	public boolean EliminarTrabajador(Trabajadora T) {
 		return MisTrabajadores.remove(T);
+	}
+	public boolean ElimininarProyectos(Proyecto P) {
+		return MisProyectos.remove(P);
 	}
 	public void InsertarCliente(Cliente C) {
 		MisClientes.add(C);
@@ -101,6 +108,17 @@ public class Empresa implements Serializable {
 			if(P!=null) {
 				if(P.getNombre().equalsIgnoreCase(Nombre)) {
 					return P;
+				}
+			}
+		}
+		return null;
+	}
+	public Contrato BuscarContrato(String Nombre) {
+
+		for(Contrato C:MisContratos) {
+			if(C!=null) {
+				if(C.getNombre().equalsIgnoreCase(Nombre)) {
+					return C;
 				}
 			}
 		}
