@@ -200,6 +200,30 @@ public class ProyectoPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Informaciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 1334, 651);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Grafico();
+			}
+		});
+		btnNewButton.setBounds(108, 223, 89, 23);
+		panel.add(btnNewButton);
+		
+		setResizable(false);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		dim= getToolkit().getScreenSize();
+		super.setSize(dim.width, dim.height-45);
+		setLocationRelativeTo(null);
+	}
+	
+	private void Grafico() {
 		DefaultPieDataset data = new DefaultPieDataset();
 		int jefeProyectos = 0;
 		int programadores = 0;
@@ -217,7 +241,7 @@ public class ProyectoPrincipal extends JFrame {
 					planificadores++;
 				}
 				if(t instanceof Diseñador) {
-					disennador++;
+					disennador++; 
 				}
 			}
 		}
@@ -228,15 +252,8 @@ public class ProyectoPrincipal extends JFrame {
 		
 		JFreeChart chart = ChartFactory.createPieChart("Trabajadores", data, true, true, false);
 		
-		ChartFrame frame = new ChartFrame("equisde", chart);
+		ChartFrame frame = new ChartFrame("Información sobre trabajadores", chart);
 		frame.pack();
 		frame.setVisible(true);
-		
-		setResizable(false);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		dim= getToolkit().getScreenSize();
-		super.setSize(dim.width, dim.height-45);
-		setLocationRelativeTo(null);
 	}
 }
