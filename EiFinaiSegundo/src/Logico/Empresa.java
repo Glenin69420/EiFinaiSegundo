@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Empresa implements Serializable {
 	
 	/**
-	 * comentario
+	 * 
 	 */
 	private static final long serialVersionUID = -4736481894836561533L;
 	private ArrayList<Trabajadora> MisTrabajadores;
