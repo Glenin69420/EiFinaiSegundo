@@ -15,10 +15,16 @@ import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
+
+import Logico.Empresa;
+import Logico.Proyecto;
+import Logico.Trabajadora;
+
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -31,6 +37,10 @@ public class RegistroDeContrato extends JDialog {
 	private JTextField textField;
 	private int index = -1;
 	private int indexBack = -1;
+	private ArrayList<String> disponibles;
+	private ArrayList<String> Seleccionados;
+	private JList ListaDisponibles;
+	private JList ListaSeleccionados;
 	/**
 	 * Launch the application.
 	 */
@@ -104,7 +114,7 @@ public class RegistroDeContrato extends JDialog {
 				panel_1.add(panel_2);
 				panel_2.setLayout(new BorderLayout(0, 0));
 				
-				JList ListaDisponibles = new JList();
+				ListaDisponibles = new JList();
 				ListaDisponibles.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -120,6 +130,15 @@ public class RegistroDeContrato extends JDialog {
 			JButton Derecha = new JButton(">>");
 			Derecha.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					if(ListaDisponibles.getSelectedIndex()!=-1) {
+						Seleccionados.add(disponibles.get(ListaDisponibles.getSelectedIndex()));
+						disponibles.remove(ListaDisponibles.getSelectedIndex());
+						ListaDisponibles.removeAll();
+						ListaSeleccionados.removeAll();
+						ListaDisponibles.setListData(disponibles.toArray());
+						ListaSeleccionados.setListData(Seleccionados.toArray());
+						Derecha.setEnabled(false);
+					}
 				}
 			});
 			Derecha.setBounds(236, 93, 89, 23);
@@ -128,6 +147,15 @@ public class RegistroDeContrato extends JDialog {
 			JButton Izquierda = new JButton("<<");
 			Izquierda.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					if(ListaSeleccionados.getSelectedIndex() != -1) {
+						disponibles.add(Seleccionados.get(ListaSeleccionados.getSelectedIndex()));
+						Seleccionados.remove(ListaSeleccionados.getSelectedIndex());
+						ListaDisponibles.removeAll();
+						ListaSeleccionados.removeAll();;
+						ListaDisponibles.setListData(disponibles.toArray());
+						ListaSeleccionados.setListData(Seleccionados.toArray());
+						Izquierda.setEnabled(false);
+					}
 				}
 			});
 			Izquierda.setBounds(236, 142, 89, 23);
@@ -148,7 +176,7 @@ public class RegistroDeContrato extends JDialog {
 			panel_1.add(panel_2);
 			panel_2.setLayout(new BorderLayout(0, 0));
 			
-			JList ListaSeleccionados = new JList();
+			ListaSeleccionados = new JList();
 			panel_2.add(ListaSeleccionados, BorderLayout.CENTER);
 		}
 		{
@@ -172,5 +200,18 @@ public class RegistroDeContrato extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	
+	
+	private void CargarDisponibles(String seleccion) {
+		disponibles = new ArrayList<String>();
+		Seleccionados = new ArrayList<String>();
+		if(seleccion.equalsIgnoreCase("<Todos>")){
+		for(Proyecto P: Empresa.getInstance().getMisProyectos()) {
+			disponibles.add("Nombre: "+P.getNombre()+" : "+"Tipo"+": "+Empresa.TipoDeProyecto(P));
+		}
+		}
+		ListaDisponibles.removeAll();
+		ListaDisponibles.setListData(disponibles.toArray());
 	}
 }
