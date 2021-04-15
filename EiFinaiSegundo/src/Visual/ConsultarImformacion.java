@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import Logico.Cliente;
+import Logico.Contrato;
 import Logico.Empresa;
 
 import java.awt.event.ActionListener;
@@ -25,7 +26,7 @@ import java.awt.Toolkit;
 public class ConsultarImformacion extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField TxtCodigo;
+	private JTextField TxtNombre;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 
@@ -70,11 +71,11 @@ public class ConsultarImformacion extends JDialog {
 				panel.add(lblNewLabel);
 			}
 			{
-				TxtCodigo = new JTextField();
-				TxtCodigo.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
-				TxtCodigo.setBounds(130, 76, 96, 19);
-				panel.add(TxtCodigo);
-				TxtCodigo.setColumns(10);
+				TxtNombre = new JTextField();
+				TxtNombre.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
+				TxtNombre.setBounds(130, 76, 96, 19);
+				panel.add(TxtNombre);
+				TxtNombre.setColumns(10);
 			}
 			
 			JPanel panel_1 = new JPanel();
@@ -92,11 +93,11 @@ public class ConsultarImformacion extends JDialog {
 			btnNewButton = new JButton("Consultar");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Cliente C = Empresa.getInstance().BuscarCliente(TxtCodigo.getText());
+					Contrato C = Empresa.getInstance().BuscarContrato(TxtNombre.getText());
 					if(C!=null) {
-						for(Cliente Clie:Empresa.getInstance().getMisClientes()) {
-							if(Clie.getIdentificacion().equalsIgnoreCase(TxtCodigo.getText())) {
-								ImformacionDeClientes Clie1 = new ImformacionDeClientes(TxtCodigo.getText());
+						for(Contrato Clie:Empresa.getInstance().getMisContratos()) {
+							if(Clie.getNombre().equalsIgnoreCase(TxtNombre.getText())) {
+								ImformacionDeClientes Clie1 = new ImformacionDeClientes(TxtNombre.getText());
 								Clie1.setVisible(true);
 								Clie1.setModal(false);
 								dispose();
@@ -104,7 +105,7 @@ public class ConsultarImformacion extends JDialog {
 						}
 					}else {
 						JOptionPane.showMessageDialog(null, "No existe un cliente con ese codigo ", "Error", JOptionPane.ERROR_MESSAGE);
-						TxtCodigo.setText("");
+						TxtNombre.setText("");
 					}
 				}
 			});

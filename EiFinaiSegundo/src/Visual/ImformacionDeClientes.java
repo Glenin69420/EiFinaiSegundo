@@ -13,18 +13,31 @@ import Logico.Contrato;
 import Logico.Empresa;
 
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.Caret;
+
+import com.sun.glass.ui.Pixels.Format;
+
 import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class ImformacionDeClientes extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField TxtNombre;
+	private JTextField TxtCodigo;
+	private JTextField TxtCliente;
+	private JTextField TxtPago;
+	private JTextField FechaInicio;
+	private JTextField FechaFinal;
 
 	/**
 	 * Launch the application.
@@ -52,8 +65,9 @@ public class ImformacionDeClientes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ImformacionDeClientes(String Nombre) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ImformacionDeClientes.class.getResource("/Imagenes/contrato.png")));
 		setTitle("Gestion de Contratos");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 361);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -65,65 +79,118 @@ public class ImformacionDeClientes extends JDialog {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Nombre de contrato:");
-		lblNewLabel.setBounds(135, 40, 125, 16);
+		lblNewLabel.setBounds(132, 74, 125, 16);
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(254, 39, 150, 19);
-		panel.add(textField);
-		textField.setColumns(10);
+		TxtNombre = new JTextField();
+		TxtNombre.setEditable(false);
+		TxtNombre.setBounds(252, 73, 161, 19);
+		panel.add(TxtNombre);
+		TxtNombre.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Codigo de contrato:");
-		lblNewLabel_1.setBounds(135, 63, 128, 13);
+		lblNewLabel_1.setBounds(132, 103, 128, 13);
 		panel.add(lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(254, 60, 150, 19);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		TxtCodigo = new JTextField();
+		TxtCodigo.setEditable(false);
+		TxtCodigo.setBounds(252, 100, 161, 19);
+		panel.add(TxtCodigo);
+		TxtCodigo.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(ImformacionDeClientes.class.getResource("/Imagenes/contrato.png")));
-		lblNewLabel_2.setBounds(10, 25, 128, 128);
+		lblNewLabel_2.setBounds(10, 74, 128, 128);
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Nombre del cliente:");
-		lblNewLabel_3.setBounds(135, 85, 109, 13);
+		lblNewLabel_3.setBounds(132, 126, 109, 13);
 		panel.add(lblNewLabel_3);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(254, 82, 150, 19);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
-		setLocationRelativeTo(null);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton cancelButton = new JButton("Salir");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+		TxtCliente = new JTextField();
+		TxtCliente.setEditable(false);
+		TxtCliente.setBounds(252, 123, 161, 19);
+		panel.add(TxtCliente);
+		TxtCliente.setColumns(10);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.BLUE);
+		panel_1.setBounds(10, 15, 406, 49);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_4 = new JLabel("Imformacion");
+		lblNewLabel_4.setForeground(Color.WHITE);
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setFont(new Font("Arial Black", Font.PLAIN, 30));
+		lblNewLabel_4.setBounds(10, 10, 386, 29);
+		panel_1.add(lblNewLabel_4);
+		
+		TxtPago = new JTextField();
+		TxtPago.setEditable(false);
+		TxtPago.setBounds(195, 152, 96, 19);
+		panel.add(TxtPago);
+		TxtPago.setColumns(10);
+		
+		JLabel lblNewLabel_5 = new JLabel("Pago total:");
+		lblNewLabel_5.setBounds(132, 155, 96, 13);
+		panel.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("Fecha de inicio:");
+		lblNewLabel_6.setBounds(67, 212, 96, 13);
+		panel.add(lblNewLabel_6);
+		
+		FechaInicio = new JTextField();
+		FechaInicio.setEditable(false);
+		FechaInicio.setBounds(67, 225, 125, 19);
+		panel.add(FechaInicio);
+		FechaInicio.setColumns(10);
+		
+		JLabel lblNewLabel_7 = new JLabel("Fecha de conclusion:");
+		lblNewLabel_7.setBounds(230, 212, 128, 13);
+		panel.add(lblNewLabel_7);
+		
+		FechaFinal = new JTextField();
+		FechaFinal.setEditable(false);
+		FechaFinal.setBounds(231, 225, 127, 19);
+		panel.add(FechaFinal);
+		FechaFinal.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Salir");
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setBackground(Color.RED);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
 			}
-		}
-	//	Llenar(Nombre);
+		});
+		btnNewButton.setBounds(159, 274, 85, 21);
+		panel.add(btnNewButton);
+		setLocationRelativeTo(null);
+		Llenar(Nombre);
 	}
-/*	public void Llenar(String Nombre) {
+	public void Llenar(String Nombre) {
 		Contrato C = Empresa.getInstance().BuscarContrato(Nombre);
 		if(C!=null) {
 			for(Contrato C1: Empresa.getInstance().getMisContratos()) {
 				if(C1.getNombre().equalsIgnoreCase(Nombre)) {
 				TxtNombre.setText(C1.getNombre());
-				TxtApellidos.setText(C1.getApellidos());
-				TxtCodigo.setText(C1.getIdentificacion());
+				TxtCodigo.setText(C1.getIdentificador());
+				TxtCliente.setText(C1.getCliente().getNombre());
+				String cadena = Float.toString(C1.getTotal());
+				TxtPago.setText(cadena);
+
+				FechaInicio.setText(convertirFechaString(C1.getFechaInicio()));
+				FechaFinal.setText(convertirFechaString(C1.getFechaInicio()));
+				
 				}
 			}
 			
 		}
-	}*/
+	}
+	
+	public String convertirFechaString(Date date){
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+
+	}
 }
