@@ -95,11 +95,11 @@ public class Empresa implements Serializable {
 		}
 		return null;
 	}
-	public Proyecto BuscarProyecto(String Codigo) {
+	public Proyecto BuscarProyecto(String Nombre) {
 
 		for(Proyecto P:MisProyectos) {
 			if(P!=null) {
-				if(P.getIndentificacion().equalsIgnoreCase(Codigo)) {
+				if(P.getNombre().equalsIgnoreCase(Nombre)) {
 					return P;
 				}
 			}

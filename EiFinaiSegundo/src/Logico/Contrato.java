@@ -23,7 +23,7 @@ public class Contrato {
 		this.cliente = cliente;
 		this.nombre = nombre;
 		this.prorroga = 0;
-		this.penalidad = 0;
+		//this.penalidad = 0;
 		this.penalidad = 1000;
 		//this.prorroga = prorroga;
 

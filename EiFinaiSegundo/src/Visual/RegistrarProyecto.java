@@ -37,6 +37,7 @@ import java.util.Date;
 
 import javax.swing.ListSelectionModel;
 import java.awt.Toolkit;
+import javax.swing.border.EtchedBorder;
 
 public class RegistrarProyecto extends JDialog {
 
@@ -125,7 +126,7 @@ public class RegistrarProyecto extends JDialog {
 					    P.add(Empresa.getInstance().BuscarTrabajador(splits[1]));
 					    Empresa.getInstance().EliminarTrabajador(Empresa.getInstance().BuscarTrabajador(splits[1]));
 					}
-					String aux = "P-"+Empresa.ProyectoCod++;
+					String aux = "C-"+Empresa.ProyectoCod++;
 					Proyecto p = new Proyecto(TxtNombre.getText(), aux, TxtArea.getText(), P,TipoCombo.getSelectedItem().toString());
 					float Cambio = Float.parseFloat(TxtPrecio.getText());
 					p.setTotal(Cambio);
@@ -172,7 +173,7 @@ public class RegistrarProyecto extends JDialog {
 			panel.add(TxtArea);
 			
 			JPanel panel_2 = new JPanel();
-			panel_2.setBorder(new TitledBorder(null, "Empleados disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Empleados disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 			panel_2.setBounds(20, 265, 195, 164);
 			panel.add(panel_2);
 			panel_2.setLayout(new BorderLayout(0, 0));
@@ -191,6 +192,7 @@ public class RegistrarProyecto extends JDialog {
 			panel_2.add(ListaDisponibles, BorderLayout.CENTER);
 			
 			BtnRegistrar = new JButton(">>");
+			BtnRegistrar.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
 			BtnRegistrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(ListaDisponibles.getSelectedIndex()!=-1) {
@@ -221,6 +223,7 @@ public class RegistrarProyecto extends JDialog {
 			panel.add(BtnRegistrar);
 			
 			BtnVolver = new JButton("<<");
+			BtnVolver.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
 			BtnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(ListaSeleccionados.getSelectedIndex() != -1) {
@@ -235,7 +238,7 @@ public class RegistrarProyecto extends JDialog {
 						for(int i=0; i<Seleccionados.size();i++) {
 							String[] aux = Seleccionados.get(i).split(":");
 							precioTotal+= Empresa.getInstance().BuscarTrabajador(aux[1]).Sueldo();
-							Empresa.getInstance().BuscarTrabajador(aux[1]).setSueldo(precioTotal);
+							//Empresa.getInstance().BuscarTrabajador(aux[1]).setSueldo(precioTotal);
 						}
 						TxtPrecio.setText(""+precioTotal);
 						
@@ -248,7 +251,7 @@ public class RegistrarProyecto extends JDialog {
 			panel.add(BtnVolver);
 			
 			JPanel panel_3 = new JPanel();
-			panel_3.setBorder(new TitledBorder(null, "Empleados seleccionados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Empleados seleccionados", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 			panel_3.setBounds(320, 265, 195, 164);
 			panel.add(panel_3);
 			panel_3.setLayout(new BorderLayout(0, 0));
@@ -279,6 +282,7 @@ public class RegistrarProyecto extends JDialog {
 			panel.add(lblNewLabel_5);
 			
 			TxtPrecio = new JTextField();
+			TxtPrecio.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
 			TxtPrecio.setBounds(393, 436, 120, 19);
 			panel.add(TxtPrecio);
 			TxtPrecio.setColumns(10);

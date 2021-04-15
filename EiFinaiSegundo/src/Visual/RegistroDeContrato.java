@@ -29,18 +29,32 @@ import java.util.Calendar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.ImageIcon;
+import javax.swing.border.EtchedBorder;
 
 public class RegistroDeContrato extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField CodigoCliente;
-	private JTextField textField;
 	private int index = -1;
 	private int indexBack = -1;
 	private ArrayList<String> disponibles;
 	private ArrayList<String> Seleccionados;
 	private JList ListaDisponibles;
 	private JList ListaSeleccionados;
+	private JSpinner SpnFinal;
+	private JComboBox comboBox;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JSpinner spinner;
+	private JTextField TxtPrecio;
+	private JButton BtnRegistrar;
+	private JButton BtnVolver;
+	private String Seleccion = "<Todos>";
+	private String seleccion = "<Web>";
 	/**
 	 * Launch the application.
 	 */
@@ -58,16 +72,20 @@ public class RegistroDeContrato extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistroDeContrato() {
-		setBounds(100, 100, 599, 405);
+		setTitle("Creacion de contrato");
+		setBounds(100, 100, 598, 648);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(Color.GRAY);
+		contentPanel.setForeground(Color.YELLOW);
+		contentPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setLocationRelativeTo(null);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setForeground(Color.YELLOW);
 		panel.setBorder(new TitledBorder(null, "Informaci\u00F3n del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 563, 54);
+		panel.setBounds(10, 82, 558, 54);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -81,36 +99,27 @@ public class RegistroDeContrato extends JDialog {
 			panel.add(CodigoCliente);
 			CodigoCliente.setColumns(10);
 		}
-		
-		JLabel lblNewLabel = new JLabel("Nombre del contrato:");
-		lblNewLabel.setBounds(288, 29, 111, 14);
-		panel.add(lblNewLabel);
-		
-		textField = new JTextField();
-		textField.setBounds(396, 26, 157, 20);
-		panel.add(textField);
-		textField.setColumns(10);
 		{
 			JPanel panel_1 = new JPanel();
-			panel_1.setBorder(new TitledBorder(null, "Informaci\u00F3n del proyecto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_1.setBounds(10, 87, 563, 235);
+			panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informaci\u00F3n del contrato", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel_1.setBounds(10, 148, 558, 439);
 			contentPanel.add(panel_1);
 			panel_1.setLayout(null);
 			{
 				JLabel Trabajadores = new JLabel("Tipos de proyectos:");
-				Trabajadores.setBounds(10, 34, 111, 14);
+				Trabajadores.setBounds(10, 189, 111, 14);
 				panel_1.add(Trabajadores);
 			}
 			{
-				JComboBox comboBox = new JComboBox();
-				comboBox.setModel(new DefaultComboBoxModel(new String[] {"Web", "Movil", "Desktop"}));
-				comboBox.setBounds(126, 31, 122, 21);
+				comboBox = new JComboBox();
+				comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Web", "Movil", "Desktop"}));
+				comboBox.setBounds(128, 186, 122, 21);
 				panel_1.add(comboBox);
 			}
 			{
 				JPanel panel_2 = new JPanel();
 				panel_2.setBorder(new TitledBorder(null, "Proyectos Registrados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panel_2.setBounds(10, 76, 200, 115);
+				panel_2.setBounds(10, 220, 206, 115);
 				panel_1.add(panel_2);
 				panel_2.setLayout(new BorderLayout(0, 0));
 				
@@ -120,15 +129,15 @@ public class RegistroDeContrato extends JDialog {
 					public void mouseClicked(MouseEvent e) {
 						index = ListaDisponibles.getSelectedIndex();
 						if(index!=-1) {
-							//BtnRegistrar.setEnabled(true);
+							BtnRegistrar.setEnabled(true);
 							}
 					}
 				});
 				panel_2.add(ListaDisponibles, BorderLayout.CENTER);
 			}
 			
-			JButton Derecha = new JButton(">>");
-			Derecha.addActionListener(new ActionListener() {
+			BtnRegistrar = new JButton(">>");
+			BtnRegistrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(ListaDisponibles.getSelectedIndex()!=-1) {
 						Seleccionados.add(disponibles.get(ListaDisponibles.getSelectedIndex()));
@@ -137,15 +146,23 @@ public class RegistroDeContrato extends JDialog {
 						ListaSeleccionados.removeAll();
 						ListaDisponibles.setListData(disponibles.toArray());
 						ListaSeleccionados.setListData(Seleccionados.toArray());
-						Derecha.setEnabled(false);
+						BtnRegistrar.setEnabled(false);
+						float precioTotal = 0;
+						for(int i=0; i<Seleccionados.size();i++) {
+							String[] aux = Seleccionados.get(i).split(":");
+							precioTotal+= Empresa.getInstance().BuscarProyecto(aux[1]).getTotal();
+									
+						}
+						TxtPrecio.setText(""+precioTotal);
+						
 					}
 				}
 			});
-			Derecha.setBounds(236, 93, 89, 23);
-			panel_1.add(Derecha);
+			BtnRegistrar.setBounds(226, 249, 89, 23);
+			panel_1.add(BtnRegistrar);
 			
-			JButton Izquierda = new JButton("<<");
-			Izquierda.addActionListener(new ActionListener() {
+			BtnVolver = new JButton("<<");
+			BtnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(ListaSeleccionados.getSelectedIndex() != -1) {
 						disponibles.add(Seleccionados.get(ListaSeleccionados.getSelectedIndex()));
@@ -154,52 +171,127 @@ public class RegistroDeContrato extends JDialog {
 						ListaSeleccionados.removeAll();;
 						ListaDisponibles.setListData(disponibles.toArray());
 						ListaSeleccionados.setListData(Seleccionados.toArray());
-						Izquierda.setEnabled(false);
+						BtnVolver.setEnabled(false);
+						float precioTotal = 0;
+						for(int i=0; i<Seleccionados.size();i++) {
+							String[] aux = Seleccionados.get(i).split(":");
+							precioTotal+= Empresa.getInstance().BuscarProyecto(aux[1]).getTotal();
+							
+							
+							
+							
+							
+						}
+						TxtPrecio.setText(""+precioTotal);
 					}
 				}
 			});
-			Izquierda.setBounds(236, 142, 89, 23);
-			panel_1.add(Izquierda);
+			BtnVolver.setBounds(226, 283, 89, 23);
+			panel_1.add(BtnVolver);
 			
 			JLabel lblNewLabel_1 = new JLabel("Fecha de finalizaci\u00F3n:");
-			lblNewLabel_1.setBounds(279, 34, 103, 14);
+			lblNewLabel_1.setBounds(370, 124, 122, 14);
 			panel_1.add(lblNewLabel_1);
 			
-			JSpinner spinner_2 = new JSpinner();
-			spinner_2.setModel(new SpinnerDateModel(new Date(1618372800000L), null, null, Calendar.DAY_OF_YEAR));
-			spinner_2.setBounds(392, 31, 161, 20);
-			panel_1.add(spinner_2);
+			SpnFinal = new JSpinner();
+			SpnFinal.setModel(new SpinnerDateModel(new Date(1618459200000L), null, null, Calendar.DAY_OF_YEAR));
+			SpnFinal.setBounds(370, 139, 161, 20);
+			panel_1.add(SpnFinal);
 			
 			JPanel panel_2 = new JPanel();
 			panel_2.setBorder(new TitledBorder(null, "Proyectos Seleccionados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_2.setBounds(366, 76, 172, 115);
+			panel_2.setBounds(331, 220, 206, 115);
 			panel_1.add(panel_2);
 			panel_2.setLayout(new BorderLayout(0, 0));
 			
 			ListaSeleccionados = new JList();
-			panel_2.add(ListaSeleccionados, BorderLayout.CENTER);
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton TerminarButton = new JButton("Registrar");
-				TerminarButton.setActionCommand("OK");
-				buttonPane.add(TerminarButton);
-				getRootPane().setDefaultButton(TerminarButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancelar\r\n");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
+			ListaSeleccionados.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if(ListaSeleccionados.getSelectedIndex()!=-1) {
+						BtnVolver.setEnabled(true);
 					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+					
+				}
+			});
+			panel_2.add(ListaSeleccionados, BorderLayout.CENTER);
+			
+			JLabel lblNewLabel = new JLabel("");
+			lblNewLabel.setIcon(new ImageIcon(RegistroDeContrato.class.getResource("/Imagenes/documentos-oficiales.png")));
+			lblNewLabel.setBounds(10, 25, 138, 134);
+			panel_1.add(lblNewLabel);
+			
+			JLabel lblNewLabel_3 = new JLabel("Nombre:");
+			lblNewLabel_3.setBounds(158, 38, 52, 13);
+			panel_1.add(lblNewLabel_3);
+			
+			textField = new JTextField();
+			textField.setBounds(158, 55, 373, 19);
+			panel_1.add(textField);
+			textField.setColumns(10);
+			
+			JLabel lblNewLabel_4 = new JLabel("Codigo:");
+			lblNewLabel_4.setBounds(158, 83, 45, 13);
+			panel_1.add(lblNewLabel_4);
+			
+			textField_1 = new JTextField();
+			textField_1.setEditable(false);
+			textField_1.setBounds(158, 96, 96, 19);
+			panel_1.add(textField_1);
+			textField_1.setColumns(10);
+			
+			JLabel lblNewLabel_5 = new JLabel("Fecha de inicio:");
+			lblNewLabel_5.setBounds(158, 125, 89, 13);
+			panel_1.add(lblNewLabel_5);
+			
+		
+			spinner = new JSpinner();
+			spinner.setBounds(158, 139, 161, 20);
+			spinner.setModel(new SpinnerDateModel(new Date(1618459200000L), null, null, Calendar.DAY_OF_YEAR));
+			panel_1.add(spinner);
+			
+			JButton btnNewButton = new JButton("Registrar");
+			btnNewButton.setForeground(Color.WHITE);
+			btnNewButton.setBackground(Color.BLUE);
+			btnNewButton.setBounds(128, 395, 88, 21);
+			panel_1.add(btnNewButton);
+			
+			JButton btnNewButton_1 = new JButton("Cancelar");
+			btnNewButton_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			btnNewButton_1.setForeground(Color.WHITE);
+			btnNewButton_1.setBackground(Color.RED);
+			btnNewButton_1.setBounds(343, 395, 85, 21);
+			panel_1.add(btnNewButton_1);
+			
+			JLabel lblNewLabel_6 = new JLabel("Saldo total:");
+			lblNewLabel_6.setBounds(331, 352, 70, 13);
+			panel_1.add(lblNewLabel_6);
+			
+			TxtPrecio = new JTextField();
+			TxtPrecio.setBounds(398, 349, 133, 19);
+			panel_1.add(TxtPrecio);
+			TxtPrecio.setColumns(10);
 		}
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.BLUE);
+		panel_1.setForeground(Color.BLUE);
+		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(10, 10, 558, 62);
+		contentPanel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_2 = new JLabel("Contratos");
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setFont(new Font("Arial Black", Font.PLAIN, 30));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(10, 10, 586, 42);
+		panel_1.add(lblNewLabel_2);
+		CargarDisponibles(Seleccion);
 	}
 	
 	
@@ -208,7 +300,7 @@ public class RegistroDeContrato extends JDialog {
 		Seleccionados = new ArrayList<String>();
 		if(seleccion.equalsIgnoreCase("<Todos>")){
 		for(Proyecto P: Empresa.getInstance().getMisProyectos()) {
-			//disponibles.add("Nombre: "+P.getNombre()+" : "+"Tipo"+": "+Empresa.TipoDeProyecto(P));
+			disponibles.add("Nombre:"+P.getNombre()+":"+"Tipo"+":"+P.getTipoDeProyecto());
 		}
 		}
 		ListaDisponibles.removeAll();

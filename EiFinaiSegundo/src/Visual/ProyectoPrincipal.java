@@ -150,6 +150,16 @@ public class ProyectoPrincipal extends JFrame {
 		});
 		mnNewMenu_3.add(mntmNewMenuItem_6);
 		
+		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Contratos");
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistroDeContrato C = new RegistroDeContrato();
+				C.setVisible(true);
+				C.setResizable(false);
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_8);
+		
 		JMenu mnNewMenu_2 = new JMenu("Prueba");
 		menuBar.add(mnNewMenu_2);
 		
