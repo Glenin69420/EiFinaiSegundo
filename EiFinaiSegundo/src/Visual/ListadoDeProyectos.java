@@ -15,6 +15,7 @@ import Logico.JefeProyecto;
 import Logico.Planificadores;
 import Logico.Trabajadora;
 import Logico.Programadores;
+import Logico.Proyecto;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -56,7 +57,7 @@ import java.util.ArrayList;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
-public class ListadoDeTrabajadores extends JDialog {
+public class ListadoDeProyectos extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private DefaultTableModel Model;
@@ -76,7 +77,7 @@ public class ListadoDeTrabajadores extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			ListadoDeTrabajadores dialog = new ListadoDeTrabajadores();
+			ListadoDeProyectos dialog = new ListadoDeProyectos();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -87,10 +88,10 @@ public class ListadoDeTrabajadores extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListadoDeTrabajadores() {
+	public ListadoDeProyectos() {
 		//setIconImage(Toolkit.getDefaultToolkit().getImage(ListaDeQuesos.class.getResource("/Imagenes/logo.png")));
 		setTitle("Listado de trabajadores");
-		setBounds(100, 100, 1114, 557);
+		setBounds(100, 100, 640, 557);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLocationRelativeTo(null);
@@ -112,21 +113,21 @@ public class ListadoDeTrabajadores extends JDialog {
 			CbxTipo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Seleccion = CbxTipo.getSelectedItem().toString();
-					//CargarTabla2(Seleccion);
+					CargarTabla2(Seleccion);
 
 					
 				}
 
 
 			});
-			CbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Jefe de proyecto", "Programador", "Planificador", "Dise\u00F1ador"}));
+			CbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Web", "Mobile", "Desktop"}));
 			CbxTipo.setBounds(122, 17, 130, 21);
 			panel.add(CbxTipo);
 		}
 		{
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new EmptyBorder(0, 0, 0, 0));
-			panel_1.setBounds(5, 49, 1085, 434);
+			panel_1.setBounds(5, 49, 611, 434);
 			contentPanel.add(panel_1);
 			panel_1.setLayout(new BorderLayout(0, 0));
 			
@@ -143,7 +144,7 @@ public class ListadoDeTrabajadores extends JDialog {
 				table = new JTable();
 				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				Model = new DefaultTableModel();
-				String[] Headers = {"Codigo","Nombre","Cargo","Apellidos","Direccion","C.Trabajadores","L.Programacion","C.DeDias"};
+				String[] Headers = {"Codigo","Nombre","Tipo de Proyecto"};
 				Model.setColumnIdentifiers(Headers);
 				table.setModel(Model);
 				table.setFont(new Font("Verdana", Font.PLAIN, 17));
@@ -210,47 +211,25 @@ public class ListadoDeTrabajadores extends JDialog {
 			}
 		}
 		CargarTabla();
-	//	CargarTabla2(Seleccion);
+		CargarTabla2(Seleccion);
 		
 		
 	}
 	private void CargarTabla() {
 		Model.setRowCount(0);
 		Filas = new Object[Model.getColumnCount()];
-		for (Trabajadora T : Empresa.getInstance().getMisTrabajadores()) {
+		for (Proyecto T : Empresa.getInstance().getMisProyectos()) {
 			if(T != null) {	
-				Filas[0] = T.getIdentificador();
+				Filas[0] = T.getIndentificacion();
 				Filas[1] = T.getNombre();
-				Filas[2] = Empresa.getInstance().TipoDeTrabajador(T);
-				Filas[3] = T.getApellido();
-				Filas[4] = T.getDireccion();
-				if(T instanceof JefeProyecto) {
-					Filas[5] = ((JefeProyecto) T).getCantidadDeTrabajadores();
-					Filas[6] = null;
-					Filas[7] = null;
-				}
-				if(T instanceof Programadores) {
-					Filas[6] = ((Programadores) T).getLenguajeDeProgramacion();
-					Filas[5] = null;
-					Filas[7] = null;
-					
-				}
-				if(T instanceof Planificadores) {
-					Filas[7] = ((Planificadores) T).getCantidadDeDias();
-					Filas[5] = null;
-					Filas[6] = null;
-				}
-				if(T instanceof Diseñador) {
-					Filas[7] = null;
-					Filas[5] = null;
-					Filas[6] = null;
-				}
+				Filas[2] = Empresa.getInstance().TipoDeProyecto(T);
+				
 				Model.addRow(Filas);
 			}
 		}
 		
 	}
-	/*private void CargarTabla2(String seleccion) {
+	private void CargarTabla2(String seleccion) {
 		Model.setRowCount(0);
 		Filas = new Object[Model.getColumnCount()];
 
@@ -318,7 +297,7 @@ public class ListadoDeTrabajadores extends JDialog {
 
 		}
 
-	}*/
+	}
 
 
 }

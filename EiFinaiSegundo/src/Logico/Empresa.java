@@ -15,6 +15,7 @@ public class Empresa implements Serializable {
 	private ArrayList<Proyecto> MisProyectos;
 	private static Empresa Centro = null;
 	private static Cliente loginCliente;
+	public static int ProyectoCod = 1;
 
 	public Empresa() {
 		super();
@@ -62,18 +63,21 @@ public class Empresa implements Serializable {
 	public void InsertarTrabajador(Trabajadora Trabajador) {
 		MisTrabajadores.add(Trabajador);
 	} 
-	public boolean EliminarTrabajador(Trabajadora Trabajador) {
-		return MisTrabajadores.remove(Trabajador);
+	public void InsertarProyecto(Proyecto proyecto) {
+		MisProyectos.add(proyecto);
+	} 
+	public boolean EliminarTrabajador(Trabajadora T) {
+		return MisTrabajadores.remove(T);
 	}
 	public void InsertarCliente(Cliente C) {
 		MisClientes.add(C);
 	} 
 	
-	public Trabajadora BuscarTrabajador(String Codigo) {
+	public Trabajadora BuscarTrabajador(String Nombre) {
 
 		for(Trabajadora T:MisTrabajadores) {
 			if(T!=null) {
-				if(T.getIdentificador().equalsIgnoreCase(Codigo)) {
+				if(T.getNombre().equalsIgnoreCase(Nombre)) {
 					return T;
 				}
 			}
@@ -86,6 +90,17 @@ public class Empresa implements Serializable {
 			if(C!=null) {
 				if(C.getIdentificacion().equalsIgnoreCase(Codigo)) {
 					return C;
+				}
+			}
+		}
+		return null;
+	}
+	public Proyecto BuscarProyecto(String Codigo) {
+
+		for(Proyecto P:MisProyectos) {
+			if(P!=null) {
+				if(P.getIndentificacion().equalsIgnoreCase(Codigo)) {
+					return P;
 				}
 			}
 		}
@@ -108,13 +123,13 @@ public class Empresa implements Serializable {
 
 	}
 	public static String TipoDeProyecto(Proyecto P) {
-		if(P.getTipoDeProyecto() == 1) {
+		if(P.getTipoDeProyecto().equalsIgnoreCase("Web")) {
 			return "Web";
 		}
-		if(P.getTipoDeProyecto() == 2) {
-			return "Movil";
+		if(P.getTipoDeProyecto().equalsIgnoreCase("Mobile")) {
+			return "Mobile";
 		}
-		 if(P.getTipoDeProyecto() == 3) {
+		 if(P.getTipoDeProyecto().equalsIgnoreCase("Desktop")) {
 			return "Desktop";
 
 		}

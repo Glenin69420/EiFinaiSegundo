@@ -128,6 +128,16 @@ public class ProyectoPrincipal extends JFrame {
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_4);
 		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("proyectos");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoDeProyectos P = new ListadoDeProyectos();
+				P.setVisible(true);
+				P.setResizable(false);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_7);
+		
 		JMenu mnNewMenu_3 = new JMenu("Creaciones");
 		menuBar.add(mnNewMenu_3);
 		

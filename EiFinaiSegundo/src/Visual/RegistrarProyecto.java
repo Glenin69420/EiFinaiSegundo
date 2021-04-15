@@ -26,10 +26,14 @@ import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.border.MatteBorder;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
+
+
 import javax.swing.ListSelectionModel;
 
 public class RegistrarProyecto extends JDialog {
@@ -45,6 +49,9 @@ public class RegistrarProyecto extends JDialog {
 	private String Seleccion = "<Todos>";
 	private JButton BtnRegistrar;
 	private JButton BtnVolver;
+	private JComboBox TipoCombo;
+	private JTextArea TxtArea;
+	private String seleccion = "<Web>";
 
 	/**
 	 * Launch the application.
@@ -105,6 +112,22 @@ public class RegistrarProyecto extends JDialog {
 			TxtNombre.setColumns(10);
 			
 			JButton BtnCrar = new JButton("Registrar");
+			BtnCrar.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+					ArrayList<Trabajadora> P = new ArrayList<Trabajadora>();
+					for (int i = 0; i <Seleccionados.size(); i++) {
+						String[] splits = Seleccionados.get(i).split(":");
+					    P.add(Empresa.getInstance().BuscarTrabajador(splits[1]));
+					    Empresa.getInstance().EliminarTrabajador(Empresa.getInstance().BuscarTrabajador(splits[1]));
+					}
+					String aux = ""+Empresa.ProyectoCod++;
+					Proyecto p = new Proyecto(TxtNombre.getText(), aux, TxtArea.getText(), P,TipoCombo.getSelectedItem().toString());
+					Empresa.getInstance().InsertarProyecto(p);
+					JOptionPane.showMessageDialog(null, "El proyecto se ha registrado", "Registro completado", JOptionPane.INFORMATION_MESSAGE);
+					
+				}
+			});
 			BtnCrar.setForeground(Color.WHITE);
 			BtnCrar.setBackground(Color.BLUE);
 			BtnCrar.setBounds(111, 468, 98, 21);
@@ -125,8 +148,10 @@ public class RegistrarProyecto extends JDialog {
 			lblNewLabel_3.setBounds(166, 128, 98, 13);
 			panel.add(lblNewLabel_3);
 			
-			JComboBox TipoCombo = new JComboBox();
-			TipoCombo.setModel(new DefaultComboBoxModel(new String[] {"Wed", "Mobile", "Desktop", "xD", "lol"}));
+			TipoCombo = new JComboBox();
+				
+			
+			TipoCombo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "<Wed>", "<Mobile>", "<Desktop>"}));
 			TipoCombo.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
 			TipoCombo.setBounds(270, 124, 247, 21);
 			panel.add(TipoCombo);
@@ -135,7 +160,7 @@ public class RegistrarProyecto extends JDialog {
 			lblNewLabel_4.setBounds(166, 162, 85, 13);
 			panel.add(lblNewLabel_4);
 			
-			JTextArea TxtArea = new JTextArea();
+			TxtArea = new JTextArea();
 			TxtArea.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLUE));
 			TxtArea.setBounds(270, 162, 247, 58);
 			panel.add(TxtArea);
