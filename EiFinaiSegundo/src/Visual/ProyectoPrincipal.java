@@ -37,6 +37,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class ProyectoPrincipal extends JFrame {
 
@@ -88,7 +90,7 @@ public class ProyectoPrincipal extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ProyectoPrincipal.class.getResource("/Imagenes/empresa.png")));
 		setTitle("Empresa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1536, 821);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -201,19 +203,32 @@ public class ProyectoPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Informaciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 1334, 651);
+		panel.setBounds(40, 10, 671, 749);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Grafico();
-			}
-		});
-		btnNewButton.setBounds(108, 223, 89, 23);
+		JButton btnNewButton = new JButton("Grafico pastel");
+		btnNewButton.setBounds(293, 74, 138, 21);
 		panel.add(btnNewButton);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(ProyectoPrincipal.class.getResource("/Imagenes/xDlolll.jpg")));
+		lblNewLabel.setBounds(42, 123, 629, 504);
+		panel.add(lblNewLabel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(900, 10, 831, 749);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JButton btnNewButton_1 = new JButton("Grafico de barras");
+		btnNewButton_1.setBounds(418, 79, 150, 21);
+		panel_1.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(ProyectoPrincipal.class.getResource("/Imagenes/barras.png")));
+		lblNewLabel_1.setBounds(133, 162, 670, 443);
+		panel_1.add(lblNewLabel_1);
 		
 		setResizable(false);
 		contentPane = new JPanel();
@@ -221,39 +236,5 @@ public class ProyectoPrincipal extends JFrame {
 		dim= getToolkit().getScreenSize();
 		super.setSize(dim.width, dim.height-45);
 		setLocationRelativeTo(null);
-	}
-	
-	private void Grafico() {
-		DefaultPieDataset data = new DefaultPieDataset();
-		int jefeProyectos = 0;
-		int programadores = 0;
-		int planificadores = 0;
-		int disennador = 0;
-		for(Trabajadora t : Empresa.getInstance().getMisTrabajadores()) {
-			if(t != null) {
-				if(t instanceof JefeProyecto) {
-					jefeProyectos++;
-				}
-				if(t instanceof Programadores) {
-					programadores++;
-				}
-				if(t instanceof Planificadores) {
-					planificadores++;
-				}
-				if(t instanceof Diseñador) {
-					disennador++; 
-				}
-			}
-		}
-		data.setValue("Jefes de proyectos", jefeProyectos);
-		data.setValue("Programadores", programadores);
-		data.setValue("planificadores", planificadores);
-		data.setValue("Diseñadores", disennador);
-		
-		JFreeChart chart = ChartFactory.createPieChart("Trabajadores", data, true, true, false);
-		
-		ChartFrame frame = new ChartFrame("Información sobre trabajadores", chart);
-		frame.pack();
-		frame.setVisible(true);
 	}
 }
