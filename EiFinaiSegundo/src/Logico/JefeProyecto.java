@@ -35,7 +35,7 @@ public class JefeProyecto extends Trabajadora {
 
 	
 	public float Sueldo() {
-		float Total = 5000;
+		float Total = 1500;
 		setSalario(Total);
 		return Salario;
 	}

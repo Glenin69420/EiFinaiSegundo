@@ -28,7 +28,7 @@ public class Planificadores extends Trabajadora {
 		Salario = salario;
 	}
 	public float Sueldo() {
-		float Total = 3000;
+		float Total = 1100;
 		setSalario(Total);
 		return Salario;
 	}

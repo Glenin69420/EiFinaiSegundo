@@ -32,7 +32,7 @@ public class Programadores extends Trabajadora {
 		Salario = salario;
 	}
 	public float Sueldo() {
-		float Total = 2000;
+		float Total = 1300;
 		setSalario(Total);
 		return Salario;
 	}
