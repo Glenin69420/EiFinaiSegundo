@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.Calendar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class RegistroDeContrato extends JDialog {
 
@@ -92,6 +93,7 @@ public class RegistroDeContrato extends JDialog {
 			}
 			{
 				JComboBox comboBox = new JComboBox();
+				comboBox.setModel(new DefaultComboBoxModel(new String[] {"Web", "Movil", "Desktop"}));
 				comboBox.setBounds(126, 31, 122, 21);
 				panel_1.add(comboBox);
 			}
